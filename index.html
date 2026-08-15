@@ -7,84 +7,46 @@
   <title>KMO Gestão • Calculadora de Deslocamento</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="logo-kmo.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIINfQ3ynH12sNbMZq0vWc2bHegbS5P9kqY=" crossorigin="">
   <style>
     :root{
-      --azul:#3f4f8f;
-      --azul-escuro:#2f3b73;
-      --dourado:#d8ad5a;
-      --dourado-claro:#f0d28a;
-      --cinza:#f5f6fa;
-      --texto:#1f2340;
-      --branco:#ffffff;
+      --azul:#3f4f8f;--azul-escuro:#2f3b73;--dourado:#d8ad5a;--dourado-claro:#f0d28a;
+      --cinza:#f5f6fa;--texto:#1f2340;--branco:#fff;--verde:#256b46;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:linear-gradient(180deg,#eef0f8 0%,#ffffff 45%);
-      color:var(--texto);
-    }
-    header{
-      background:linear-gradient(135deg,var(--azul-escuro),var(--azul));
-      color:white;
-      padding:18px 16px 26px;
-      border-bottom:5px solid var(--dourado);
-      box-shadow:0 8px 24px rgba(29,39,85,.22);
-    }
-    .header-wrap{
-      max-width:900px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
-    .logo{
-      width:84px;height:84px;border-radius:50%;
-      object-fit:cover;background:white;border:3px solid var(--dourado-claro);
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-    }
-    h1{font-size:1.35rem;margin:0 0 4px}
-    .sub{opacity:.9;font-size:.94rem}
-    main{max-width:900px;margin:-14px auto 40px;padding:0 14px}
-    .card{
-      background:white;border:1px solid #e4e7f0;border-radius:18px;
-      box-shadow:0 12px 32px rgba(28,39,85,.12);padding:18px;margin-bottom:16px
-    }
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .full{grid-column:1/-1}
+    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#eef0f8 0%,#fff 45%);color:var(--texto)}
+    header{background:linear-gradient(135deg,var(--azul-escuro),var(--azul));color:white;padding:18px 16px 26px;border-bottom:5px solid var(--dourado);box-shadow:0 8px 24px rgba(29,39,85,.22)}
+    .header-wrap{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .logo{width:84px;height:84px;border-radius:50%;object-fit:cover;background:white;border:3px solid var(--dourado-claro);box-shadow:0 5px 15px rgba(0,0,0,.25)}
+    h1{font-size:1.35rem;margin:0 0 4px}.sub{opacity:.9;font-size:.94rem}
+    main{max-width:980px;margin:-14px auto 40px;padding:0 14px}
+    .card{background:white;border:1px solid #e4e7f0;border-radius:18px;box-shadow:0 12px 32px rgba(28,39,85,.12);padding:18px;margin-bottom:16px}
+    .card-title{font-size:1.05rem;font-weight:900;margin:0 0 12px;color:var(--azul-escuro)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     label{display:block;font-weight:700;font-size:.88rem;margin-bottom:6px}
-    input,select{
-      width:100%;padding:13px 12px;border:1px solid #cfd5e6;border-radius:12px;
-      font-size:1rem;outline:none;background:#fff
-    }
+    input,select{width:100%;padding:13px 12px;border:1px solid #cfd5e6;border-radius:12px;font-size:1rem;outline:none;background:#fff}
     input:focus,select:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(63,79,143,.12)}
     .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    button{
-      border:0;border-radius:12px;padding:13px 18px;font-size:1rem;font-weight:800;
-      cursor:pointer
-    }
+    button{border:0;border-radius:12px;padding:13px 16px;font-size:.95rem;font-weight:800;cursor:pointer}
     .primary{background:linear-gradient(135deg,var(--dourado),#c79639);color:#1c2451}
     .secondary{background:#eef1fb;color:var(--azul-escuro)}
-    .result{
-      background:linear-gradient(135deg,#fffaf0,#fff);border:1px solid #ecd8aa;
-      border-radius:16px;padding:18px;margin-top:16px
-    }
-    .price{font-size:2rem;font-weight:900;color:var(--azul-escuro)}
-    .muted{color:#68708d;font-size:.9rem}
+    .mapbtn.active{background:var(--azul-escuro);color:white}
+    .danger-light{background:#fff1f1;color:#8a2b2b}
+    .result{background:linear-gradient(135deg,#fffaf0,#fff);border:1px solid #ecd8aa;border-radius:16px;padding:18px;margin-top:16px}
+    .price{font-size:2rem;font-weight:900;color:var(--azul-escuro)}.muted{color:#68708d;font-size:.9rem}
     .pill{display:inline-block;background:#eef1fb;color:var(--azul-escuro);padding:7px 10px;border-radius:999px;font-weight:700;font-size:.82rem;margin:4px 4px 0 0}
-    .status{margin-top:10px;font-size:.9rem}
-    .error{color:#a52a2a}
-    .ok{color:#256b46}
-    .footer{
-      text-align:center;color:#717892;font-size:.82rem;padding:8px 16px 30px
-    }
+    .status{margin-top:10px;font-size:.9rem}.error{color:#a52a2a}.ok{color:var(--verde)}
+    #map{height:390px;border-radius:15px;border:1px solid #d8ddeb;overflow:hidden;z-index:1}
+    .map-hint{background:#f7f8fc;border:1px dashed #cbd2e7;border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:.9rem}
+    .coords{font-size:.78rem;color:#707793;margin-top:5px;min-height:16px}
+    .tarifa-box{background:#f8f9fd;border:1px solid #e0e4f0;border-radius:14px;padding:12px}
+    .tarifa-box strong{display:block;margin-bottom:7px}
+    .footer{text-align:center;color:#717892;font-size:.82rem;padding:8px 16px 30px}
+    .leaflet-control-attribution{font-size:9px}
     @media(max-width:680px){
-      .grid{grid-template-columns:1fr}
-      .full{grid-column:auto}
-      .header-wrap{align-items:flex-start}
-      .logo{width:72px;height:72px}
-      h1{font-size:1.15rem}
-      .price{font-size:1.7rem}
+      .grid,.grid3{grid-template-columns:1fr}.header-wrap{align-items:flex-start}.logo{width:72px;height:72px}
+      h1{font-size:1.15rem}.price{font-size:1.7rem}#map{height:330px}button{flex:1 1 auto}
     }
   </style>
 </head>
@@ -94,21 +56,24 @@
     <img src="logo-kmo.png" class="logo" alt="Logo KMO Gestão">
     <div>
       <h1>KMO Gestão • Calculadora de Deslocamento</h1>
-      <div class="sub">Cálculo automático por localidade, distância e quantidade de passageiros</div>
+      <div class="sub">Georreferenciamento, rota no mapa e tarifário configurável</div>
     </div>
   </div>
 </header>
 
 <main>
   <section class="card">
+    <div class="card-title">1. Dados do deslocamento</div>
     <div class="grid">
       <div>
         <label for="origem">Origem</label>
         <input id="origem" placeholder="Ex.: Tianguá, CE" value="Tianguá, CE">
+        <div id="origemCoords" class="coords"></div>
       </div>
       <div>
         <label for="destino">Destino / Localidade</label>
         <input id="destino" placeholder="Ex.: Viçosa do Ceará, CE">
+        <div id="destinoCoords" class="coords"></div>
       </div>
       <div>
         <label for="pessoas">Quantidade de pessoas</label>
@@ -127,100 +92,251 @@
       </div>
       <div>
         <label for="kmManual">Distância manual (km) — opcional</label>
-        <input id="kmManual" type="number" min="0" step="0.1" placeholder="Preencha se quiser ignorar o mapa">
+        <input id="kmManual" type="number" min="0" step="0.1" placeholder="Ignora o cálculo da rota">
       </div>
     </div>
-
-    <div class="actions">
-      <button class="primary" onclick="calcular()">Calcular valor</button>
-      <button class="secondary" onclick="limpar()">Limpar</button>
-    </div>
-
-    <div id="status" class="status muted"></div>
-    <div id="resultado" class="result" style="display:none"></div>
   </section>
 
   <section class="card">
-    <strong>Tarifas cadastradas</strong><br>
-    <span class="pill">Até 4 pessoas: R$ 2,50/km</span>
-    <span class="pill">5 a 9 pessoas: R$ 3,50/km</span>
-    <span class="pill">10 a 18 pessoas: R$ 5,00/km</span>
-    <p class="muted" style="margin-bottom:0">O cálculo usa a distância rodoviária entre origem e destino. Para mais de 18 passageiros, o sistema solicitará ajuste da frota.</p>
+    <div class="card-title">2. Selecione os pontos no mapa</div>
+    <div class="map-hint"><b>Como usar:</b> toque em <b>Definir origem</b> ou <b>Definir destino</b> e depois toque no mapa. Você também pode usar o GPS do celular para preencher a origem.</div>
+    <div class="actions" style="margin-top:0;margin-bottom:12px">
+      <button id="btnOrigem" class="secondary mapbtn active" onclick="modoMapa('origem')">📍 Definir origem</button>
+      <button id="btnDestino" class="secondary mapbtn" onclick="modoMapa('destino')">🏁 Definir destino</button>
+      <button class="primary" onclick="usarMinhaLocalizacao()">◎ Usar minha localização</button>
+    </div>
+    <div id="map"></div>
+    <div id="mapStatus" class="status muted">Modo atual: definir origem.</div>
+  </section>
+
+  <section class="card">
+    <div class="card-title">3. Tarifário</div>
+    <div class="grid3">
+      <div class="tarifa-box">
+        <strong>Até 4 pessoas</strong>
+        <label for="tarifa4">R$/km</label>
+        <input id="tarifa4" type="number" min="0" step="0.01" value="2.50">
+      </div>
+      <div class="tarifa-box">
+        <strong>5 a 9 pessoas</strong>
+        <label for="tarifa9">R$/km</label>
+        <input id="tarifa9" type="number" min="0" step="0.01" value="3.50">
+      </div>
+      <div class="tarifa-box">
+        <strong>10 a 18 pessoas</strong>
+        <label for="tarifa18">R$/km</label>
+        <input id="tarifa18" type="number" min="0" step="0.01" value="5.00">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="secondary" onclick="salvarTarifas()">💾 Salvar tarifário neste aparelho</button>
+      <button class="danger-light" onclick="restaurarTarifas()">↺ Restaurar padrão</button>
+    </div>
+    <div id="tarifaStatus" class="status muted">Os valores podem ser alterados antes de cada cálculo.</div>
+  </section>
+
+  <section class="card">
+    <div class="actions" style="margin-top:0">
+      <button class="primary" onclick="calcular()">Calcular valor</button>
+      <button class="secondary" onclick="limpar()">Limpar trajeto</button>
+    </div>
+    <div id="status" class="status muted"></div>
+    <div id="resultado" class="result" style="display:none"></div>
   </section>
 </main>
 
 <div class="footer">KMO Gestão LTDA-EPP • CNPJ 34.655.687/0001-15</div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const fmtBRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+let map, origemMarker, destinoMarker, rotaLayer;
+let selecaoAtual = 'origem';
+let origemGeo = null, destinoGeo = null;
 
+function iniciarMapa(){
+  map = L.map('map').setView([-5.2,-39.5], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:19,
+    attribution:'&copy; OpenStreetMap'
+  }).addTo(map);
+  map.on('click', async e => {
+    const ponto = {lat:e.latlng.lat, lon:e.latlng.lng};
+    if(selecaoAtual === 'origem') await definirPonto('origem', ponto);
+    else await definirPonto('destino', ponto);
+  });
+  carregarTarifas();
+}
+
+function modoMapa(tipo){
+  selecaoAtual = tipo;
+  document.getElementById('btnOrigem').classList.toggle('active', tipo==='origem');
+  document.getElementById('btnDestino').classList.toggle('active', tipo==='destino');
+  document.getElementById('mapStatus').textContent = 'Modo atual: definir ' + tipo + '. Toque no mapa.';
+}
+
+async function reverseGeocode(lat, lon){
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16`;
+  const r = await fetch(url,{headers:{'Accept-Language':'pt-BR'}});
+  if(!r.ok) return `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  const d = await r.json();
+  return d.display_name || `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+}
+
+async function definirPonto(tipo, ponto){
+  const status = document.getElementById('mapStatus');
+  status.textContent = 'Identificando o ponto selecionado...';
+  let nome;
+  try{ nome = await reverseGeocode(ponto.lat,ponto.lon); }
+  catch(e){ nome = `${ponto.lat.toFixed(5)}, ${ponto.lon.toFixed(5)}`; }
+
+  const geo = {lat:ponto.lat, lon:ponto.lon, nome, inputValue:nome};
+  if(tipo==='origem'){
+    origemGeo = geo;
+    document.getElementById('origem').value = nome;
+    document.getElementById('origemCoords').textContent = `GPS: ${ponto.lat.toFixed(5)}, ${ponto.lon.toFixed(5)}`;
+    if(origemMarker) map.removeLayer(origemMarker);
+    origemMarker = L.marker([ponto.lat,ponto.lon]).addTo(map).bindPopup('<b>Origem</b><br>'+escapeHtml(nome)).openPopup();
+    modoMapa('destino');
+  }else{
+    destinoGeo = geo;
+    document.getElementById('destino').value = nome;
+    document.getElementById('destinoCoords').textContent = `GPS: ${ponto.lat.toFixed(5)}, ${ponto.lon.toFixed(5)}`;
+    if(destinoMarker) map.removeLayer(destinoMarker);
+    destinoMarker = L.marker([ponto.lat,ponto.lon]).addTo(map).bindPopup('<b>Destino</b><br>'+escapeHtml(nome)).openPopup();
+    modoMapa('origem');
+  }
+  ajustarMapaAosPontos();
+  status.innerHTML = '<span class="ok">Ponto definido com georreferenciamento.</span>';
+}
+
+function ajustarMapaAosPontos(){
+  const pts=[];
+  if(origemGeo) pts.push([origemGeo.lat,origemGeo.lon]);
+  if(destinoGeo) pts.push([destinoGeo.lat,destinoGeo.lon]);
+  if(pts.length===2) map.fitBounds(pts,{padding:[40,40]});
+  else if(pts.length===1) map.setView(pts[0],14);
+}
+
+function usarMinhaLocalizacao(){
+  const status = document.getElementById('mapStatus');
+  if(!navigator.geolocation){
+    status.innerHTML='<span class="error">Este aparelho não oferece geolocalização.</span>'; return;
+  }
+  status.textContent='Obtendo sua localização pelo GPS...';
+  navigator.geolocation.getCurrentPosition(
+    p => definirPonto('origem',{lat:p.coords.latitude,lon:p.coords.longitude}),
+    () => status.innerHTML='<span class="error">Não foi possível acessar sua localização. Verifique a permissão do navegador.</span>',
+    {enableHighAccuracy:true,timeout:12000,maximumAge:30000}
+  );
+}
+
+function tarifasAtuais(){
+  return {
+    t4:parseFloat(document.getElementById('tarifa4').value),
+    t9:parseFloat(document.getElementById('tarifa9').value),
+    t18:parseFloat(document.getElementById('tarifa18').value)
+  };
+}
 function tarifaPorPessoas(p){
-  if(p <= 4) return {tarifa:2.50, veiculo:'Carro • até 4 pessoas'};
-  if(p <= 9) return {tarifa:3.50, veiculo:'Veículo • até 9 pessoas'};
-  if(p <= 18) return {tarifa:5.00, veiculo:'Veículo • até 18 pessoas'};
-  return null;
+  const t=tarifasAtuais();
+  if([t.t4,t.t9,t.t18].some(v=>!Number.isFinite(v)||v<0)) return null;
+  if(p<=4) return {tarifa:t.t4,veiculo:'Carro • até 4 pessoas'};
+  if(p<=9) return {tarifa:t.t9,veiculo:'Veículo • até 9 pessoas'};
+  if(p<=18) return {tarifa:t.t18,veiculo:'Veículo • até 18 pessoas'};
+  return 'lotacao';
+}
+function salvarTarifas(){
+  const t=tarifasAtuais();
+  if([t.t4,t.t9,t.t18].some(v=>!Number.isFinite(v)||v<0)){
+    document.getElementById('tarifaStatus').innerHTML='<span class="error">Confira os três valores do tarifário.</span>';return;
+  }
+  localStorage.setItem('kmo_tarifas',JSON.stringify(t));
+  document.getElementById('tarifaStatus').innerHTML='<span class="ok">Tarifário salvo neste aparelho.</span>';
+}
+function carregarTarifas(){
+  try{
+    const t=JSON.parse(localStorage.getItem('kmo_tarifas')||'null');
+    if(t){
+      if(Number.isFinite(t.t4)) document.getElementById('tarifa4').value=t.t4.toFixed(2);
+      if(Number.isFinite(t.t9)) document.getElementById('tarifa9').value=t.t9.toFixed(2);
+      if(Number.isFinite(t.t18)) document.getElementById('tarifa18').value=t.t18.toFixed(2);
+    }
+  }catch(e){}
+}
+function restaurarTarifas(){
+  localStorage.removeItem('kmo_tarifas');
+  document.getElementById('tarifa4').value='2.50';
+  document.getElementById('tarifa9').value='3.50';
+  document.getElementById('tarifa18').value='5.00';
+  document.getElementById('tarifaStatus').innerHTML='<span class="ok">Tarifário padrão restaurado.</span>';
 }
 
 async function geocode(local){
-  const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(local);
-  const r = await fetch(url, {headers:{'Accept-Language':'pt-BR'}});
-  const data = await r.json();
-  if(!data.length) throw new Error('Localidade não encontrada: ' + local);
-  return {lat:parseFloat(data[0].lat), lon:parseFloat(data[0].lon), nome:data[0].display_name};
+  const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(local);
+  const r=await fetch(url,{headers:{'Accept-Language':'pt-BR'}});
+  const data=await r.json();
+  if(!data.length) throw new Error('Localidade não encontrada: '+local);
+  return {lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon),nome:data[0].display_name,inputValue:local};
+}
+
+function geoValido(geo,inputId){
+  return geo && document.getElementById(inputId).value.trim()===geo.inputValue;
 }
 
 async function distanciaRodoviaria(a,b){
-  const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
-  const r = await fetch(url);
-  const data = await r.json();
-  if(data.code !== 'Ok' || !data.routes?.length) throw new Error('Não foi possível calcular a rota.');
-  return data.routes[0].distance / 1000;
+  const url=`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`;
+  const r=await fetch(url);
+  const data=await r.json();
+  if(data.code!=='Ok'||!data.routes?.length) throw new Error('Não foi possível calcular a rota.');
+  return {km:data.routes[0].distance/1000,geojson:data.routes[0].geometry};
+}
+
+function desenharRota(geojson){
+  if(rotaLayer) map.removeLayer(rotaLayer);
+  rotaLayer=L.geoJSON(geojson,{style:{weight:5,opacity:.8}}).addTo(map);
+  map.fitBounds(rotaLayer.getBounds(),{padding:[35,35]});
 }
 
 async function calcular(){
-  const status = document.getElementById('status');
-  const resultado = document.getElementById('resultado');
+  const status=document.getElementById('status');
+  const resultado=document.getElementById('resultado');
   resultado.style.display='none';
 
-  const origem = document.getElementById('origem').value.trim();
-  const destino = document.getElementById('destino').value.trim();
-  const pessoas = parseInt(document.getElementById('pessoas').value);
-  const viagens = Math.max(1, parseInt(document.getElementById('viagens').value || '1'));
-  const fatorTrajeto = parseInt(document.getElementById('trajeto').value);
-  const manual = parseFloat(document.getElementById('kmManual').value);
+  const origem=document.getElementById('origem').value.trim();
+  const destino=document.getElementById('destino').value.trim();
+  const pessoas=parseInt(document.getElementById('pessoas').value);
+  const viagens=Math.max(1,parseInt(document.getElementById('viagens').value||'1'));
+  const fatorTrajeto=parseInt(document.getElementById('trajeto').value);
+  const manual=parseFloat(document.getElementById('kmManual').value);
 
-  if(!pessoas || pessoas < 1){
-    status.innerHTML='<span class="error">Informe a quantidade de pessoas.</span>'; return;
-  }
-  const info = tarifaPorPessoas(pessoas);
-  if(!info){
-    status.innerHTML='<span class="error">Para mais de 18 pessoas, é necessário definir quantidade e tipo de veículos.</span>'; return;
-  }
+  if(!pessoas||pessoas<1){status.innerHTML='<span class="error">Informe a quantidade de pessoas.</span>';return;}
+  const info=tarifaPorPessoas(pessoas);
+  if(info===null){status.innerHTML='<span class="error">Confira os valores do tarifário.</span>';return;}
+  if(info==='lotacao'){status.innerHTML='<span class="error">Para mais de 18 pessoas, defina outra composição de veículos.</span>';return;}
 
   try{
-    let kmBase;
-    let nomes = '';
-    if(!isNaN(manual) && manual > 0){
-      kmBase = manual;
-      nomes = 'Distância informada manualmente';
+    let kmBase,nomes='';
+    if(!isNaN(manual)&&manual>0){
+      kmBase=manual;nomes='Distância informada manualmente';
       status.innerHTML='<span class="ok">Usando distância manual.</span>';
-    } else {
-      if(!origem || !destino){
-        status.innerHTML='<span class="error">Informe origem e destino, ou preencha a distância manual.</span>'; return;
-      }
-      status.textContent='Localizando cidades e calculando a rota...';
-      const [a,b] = await Promise.all([geocode(origem), geocode(destino)]);
-      kmBase = await distanciaRodoviaria(a,b);
-      nomes = `${a.nome} → ${b.nome}`;
-      status.innerHTML='<span class="ok">Rota calculada com sucesso.</span>';
+    }else{
+      if(!origem||!destino){status.innerHTML='<span class="error">Informe origem e destino ou selecione os dois pontos no mapa.</span>';return;}
+      status.textContent='Calculando a rota rodoviária...';
+      const a=geoValido(origemGeo,'origem')?origemGeo:await geocode(origem);
+      const b=geoValido(destinoGeo,'destino')?destinoGeo:await geocode(destino);
+      const rota=await distanciaRodoviaria(a,b);
+      kmBase=rota.km;nomes=`${a.nome} → ${b.nome}`;
+      desenharRota(rota.geojson);
+      status.innerHTML='<span class="ok">Rota calculada e desenhada no mapa.</span>';
     }
 
-    const kmTrajeto = kmBase * fatorTrajeto;
-    const kmTotal = kmTrajeto * viagens;
-    const total = kmTotal * info.tarifa;
-
+    const kmTrajeto=kmBase*fatorTrajeto;
+    const kmTotal=kmTrajeto*viagens;
+    const total=kmTotal*info.tarifa;
     resultado.style.display='block';
-    resultado.innerHTML = `
+    resultado.innerHTML=`
       <div class="muted">Valor estimado</div>
       <div class="price">${fmtBRL(total)}</div>
       <div style="margin-top:10px">
@@ -233,14 +349,14 @@ async function calcular(){
       <div><b>Distância por viagem:</b> ${kmTrajeto.toFixed(1)} km</div>
       <div><b>Quantidade de viagens:</b> ${viagens}</div>
       <div><b>Distância total faturável:</b> ${kmTotal.toFixed(1)} km</div>
-      <div class="muted" style="margin-top:10px">${nomes}</div>
-    `;
+      <div class="muted" style="margin-top:10px">${escapeHtml(nomes)}</div>`;
   }catch(e){
-    status.innerHTML='<span class="error">'+e.message+' Você pode preencher a distância manual em km.</span>';
+    status.innerHTML='<span class="error">'+escapeHtml(e.message)+' Você pode preencher a distância manual em km.</span>';
   }
 }
 
 function limpar(){
+  document.getElementById('origem').value='Tianguá, CE';
   document.getElementById('destino').value='';
   document.getElementById('pessoas').value='4';
   document.getElementById('viagens').value='1';
@@ -248,8 +364,19 @@ function limpar(){
   document.getElementById('kmManual').value='';
   document.getElementById('resultado').style.display='none';
   document.getElementById('status').textContent='';
+  document.getElementById('origemCoords').textContent='';
+  document.getElementById('destinoCoords').textContent='';
+  origemGeo=null;destinoGeo=null;
+  if(origemMarker){map.removeLayer(origemMarker);origemMarker=null}
+  if(destinoMarker){map.removeLayer(destinoMarker);destinoMarker=null}
+  if(rotaLayer){map.removeLayer(rotaLayer);rotaLayer=null}
+  map.setView([-5.2,-39.5],6);
+  modoMapa('origem');
 }
-
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+window.addEventListener('load',iniciarMapa);
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
