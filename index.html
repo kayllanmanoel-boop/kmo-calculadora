@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta name="theme-color" content="#3f4f8f" />
+  <title>KMO Gestão • Calculadora de Deslocamento</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="logo-kmo.png">
+  <style>
+    :root{
+      --azul:#3f4f8f;
+      --azul-escuro:#2f3b73;
+      --dourado:#d8ad5a;
+      --dourado-claro:#f0d28a;
+      --cinza:#f5f6fa;
+      --texto:#1f2340;
+      --branco:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#eef0f8 0%,#ffffff 45%);
+      color:var(--texto);
+    }
+    header{
+      background:linear-gradient(135deg,var(--azul-escuro),var(--azul));
+      color:white;
+      padding:18px 16px 26px;
+      border-bottom:5px solid var(--dourado);
+      box-shadow:0 8px 24px rgba(29,39,85,.22);
+    }
+    .header-wrap{
+      max-width:900px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .logo{
+      width:84px;height:84px;border-radius:50%;
+      object-fit:cover;background:white;border:3px solid var(--dourado-claro);
+      box-shadow:0 5px 15px rgba(0,0,0,.25);
+    }
+    h1{font-size:1.35rem;margin:0 0 4px}
+    .sub{opacity:.9;font-size:.94rem}
+    main{max-width:900px;margin:-14px auto 40px;padding:0 14px}
+    .card{
+      background:white;border:1px solid #e4e7f0;border-radius:18px;
+      box-shadow:0 12px 32px rgba(28,39,85,.12);padding:18px;margin-bottom:16px
+    }
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .full{grid-column:1/-1}
+    label{display:block;font-weight:700;font-size:.88rem;margin-bottom:6px}
+    input,select{
+      width:100%;padding:13px 12px;border:1px solid #cfd5e6;border-radius:12px;
+      font-size:1rem;outline:none;background:#fff
+    }
+    input:focus,select:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(63,79,143,.12)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button{
+      border:0;border-radius:12px;padding:13px 18px;font-size:1rem;font-weight:800;
+      cursor:pointer
+    }
+    .primary{background:linear-gradient(135deg,var(--dourado),#c79639);color:#1c2451}
+    .secondary{background:#eef1fb;color:var(--azul-escuro)}
+    .result{
+      background:linear-gradient(135deg,#fffaf0,#fff);border:1px solid #ecd8aa;
+      border-radius:16px;padding:18px;margin-top:16px
+    }
+    .price{font-size:2rem;font-weight:900;color:var(--azul-escuro)}
+    .muted{color:#68708d;font-size:.9rem}
+    .pill{display:inline-block;background:#eef1fb;color:var(--azul-escuro);padding:7px 10px;border-radius:999px;font-weight:700;font-size:.82rem;margin:4px 4px 0 0}
+    .status{margin-top:10px;font-size:.9rem}
+    .error{color:#a52a2a}
+    .ok{color:#256b46}
+    .footer{
+      text-align:center;color:#717892;font-size:.82rem;padding:8px 16px 30px
+    }
+    @media(max-width:680px){
+      .grid{grid-template-columns:1fr}
+      .full{grid-column:auto}
+      .header-wrap{align-items:flex-start}
+      .logo{width:72px;height:72px}
+      h1{font-size:1.15rem}
+      .price{font-size:1.7rem}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-wrap">
+    <img src="logo-kmo.png" class="logo" alt="Logo KMO Gestão">
+    <div>
+      <h1>KMO Gestão • Calculadora de Deslocamento</h1>
+      <div class="sub">Cálculo automático por localidade, distância e quantidade de passageiros</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="grid">
+      <div>
+        <label for="origem">Origem</label>
+        <input id="origem" placeholder="Ex.: Tianguá, CE" value="Tianguá, CE">
+      </div>
+      <div>
+        <label for="destino">Destino / Localidade</label>
+        <input id="destino" placeholder="Ex.: Viçosa do Ceará, CE">
+      </div>
+      <div>
+        <label for="pessoas">Quantidade de pessoas</label>
+        <input id="pessoas" type="number" min="1" max="18" value="4">
+      </div>
+      <div>
+        <label for="viagens">Quantidade de viagens</label>
+        <input id="viagens" type="number" min="1" value="1">
+      </div>
+      <div>
+        <label for="trajeto">Tipo de trajeto</label>
+        <select id="trajeto">
+          <option value="1">Somente ida</option>
+          <option value="2" selected>Ida e volta</option>
+        </select>
+      </div>
+      <div>
+        <label for="kmManual">Distância manual (km) — opcional</label>
+        <input id="kmManual" type="number" min="0" step="0.1" placeholder="Preencha se quiser ignorar o mapa">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" onclick="calcular()">Calcular valor</button>
+      <button class="secondary" onclick="limpar()">Limpar</button>
+    </div>
+
+    <div id="status" class="status muted"></div>
+    <div id="resultado" class="result" style="display:none"></div>
+  </section>
+
+  <section class="card">
+    <strong>Tarifas cadastradas</strong><br>
+    <span class="pill">Até 4 pessoas: R$ 2,50/km</span>
+    <span class="pill">5 a 9 pessoas: R$ 3,50/km</span>
+    <span class="pill">10 a 18 pessoas: R$ 5,00/km</span>
+    <p class="muted" style="margin-bottom:0">O cálculo usa a distância rodoviária entre origem e destino. Para mais de 18 passageiros, o sistema solicitará ajuste da frota.</p>
+  </section>
+</main>
+
+<div class="footer">KMO Gestão LTDA-EPP • CNPJ 34.655.687/0001-15</div>
+
+<script>
+const fmtBRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+function tarifaPorPessoas(p){
+  if(p <= 4) return {tarifa:2.50, veiculo:'Carro • até 4 pessoas'};
+  if(p <= 9) return {tarifa:3.50, veiculo:'Veículo • até 9 pessoas'};
+  if(p <= 18) return {tarifa:5.00, veiculo:'Veículo • até 18 pessoas'};
+  return null;
+}
+
+async function geocode(local){
+  const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(local);
+  const r = await fetch(url, {headers:{'Accept-Language':'pt-BR'}});
+  const data = await r.json();
+  if(!data.length) throw new Error('Localidade não encontrada: ' + local);
+  return {lat:parseFloat(data[0].lat), lon:parseFloat(data[0].lon), nome:data[0].display_name};
+}
+
+async function distanciaRodoviaria(a,b){
+  const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
+  const r = await fetch(url);
+  const data = await r.json();
+  if(data.code !== 'Ok' || !data.routes?.length) throw new Error('Não foi possível calcular a rota.');
+  return data.routes[0].distance / 1000;
+}
+
+async function calcular(){
+  const status = document.getElementById('status');
+  const resultado = document.getElementById('resultado');
+  resultado.style.display='none';
+
+  const origem = document.getElementById('origem').value.trim();
+  const destino = document.getElementById('destino').value.trim();
+  const pessoas = parseInt(document.getElementById('pessoas').value);
+  const viagens = Math.max(1, parseInt(document.getElementById('viagens').value || '1'));
+  const fatorTrajeto = parseInt(document.getElementById('trajeto').value);
+  const manual = parseFloat(document.getElementById('kmManual').value);
+
+  if(!pessoas || pessoas < 1){
+    status.innerHTML='<span class="error">Informe a quantidade de pessoas.</span>'; return;
+  }
+  const info = tarifaPorPessoas(pessoas);
+  if(!info){
+    status.innerHTML='<span class="error">Para mais de 18 pessoas, é necessário definir quantidade e tipo de veículos.</span>'; return;
+  }
+
+  try{
+    let kmBase;
+    let nomes = '';
+    if(!isNaN(manual) && manual > 0){
+      kmBase = manual;
+      nomes = 'Distância informada manualmente';
+      status.innerHTML='<span class="ok">Usando distância manual.</span>';
+    } else {
+      if(!origem || !destino){
+        status.innerHTML='<span class="error">Informe origem e destino, ou preencha a distância manual.</span>'; return;
+      }
+      status.textContent='Localizando cidades e calculando a rota...';
+      const [a,b] = await Promise.all([geocode(origem), geocode(destino)]);
+      kmBase = await distanciaRodoviaria(a,b);
+      nomes = `${a.nome} → ${b.nome}`;
+      status.innerHTML='<span class="ok">Rota calculada com sucesso.</span>';
+    }
+
+    const kmTrajeto = kmBase * fatorTrajeto;
+    const kmTotal = kmTrajeto * viagens;
+    const total = kmTotal * info.tarifa;
+
+    resultado.style.display='block';
+    resultado.innerHTML = `
+      <div class="muted">Valor estimado</div>
+      <div class="price">${fmtBRL(total)}</div>
+      <div style="margin-top:10px">
+        <span class="pill">${info.veiculo}</span>
+        <span class="pill">Tarifa: ${fmtBRL(info.tarifa)}/km</span>
+        <span class="pill">${fatorTrajeto===2?'Ida e volta':'Somente ida'}</span>
+      </div>
+      <hr style="border:none;border-top:1px solid #eadfbf;margin:16px 0">
+      <div><b>Distância de ida:</b> ${kmBase.toFixed(1)} km</div>
+      <div><b>Distância por viagem:</b> ${kmTrajeto.toFixed(1)} km</div>
+      <div><b>Quantidade de viagens:</b> ${viagens}</div>
+      <div><b>Distância total faturável:</b> ${kmTotal.toFixed(1)} km</div>
+      <div class="muted" style="margin-top:10px">${nomes}</div>
+    `;
+  }catch(e){
+    status.innerHTML='<span class="error">'+e.message+' Você pode preencher a distância manual em km.</span>';
+  }
+}
+
+function limpar(){
+  document.getElementById('destino').value='';
+  document.getElementById('pessoas').value='4';
+  document.getElementById('viagens').value='1';
+  document.getElementById('trajeto').value='2';
+  document.getElementById('kmManual').value='';
+  document.getElementById('resultado').style.display='none';
+  document.getElementById('status').textContent='';
+}
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>
+</body>
+</html>
