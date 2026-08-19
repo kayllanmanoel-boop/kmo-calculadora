@@ -3,57 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="#0c3b86">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>KMO Driver — Rotas Escolares</title>
+  <title>KMO Drive — Gestão de Rotas</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./geo.css">
-  <style>
-    .calc-nav{display:flex;align-items:center;justify-content:center;flex:1;max-width:240px;padding:15px 14px;font-weight:800;color:#667085;text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}.calc-nav:hover{color:#0b1220;background:#f8fafc;border-color:#d8ad5a}@media(max-width:520px){.calc-nav{padding:13px 7px;font-size:11px}}
-  </style>
 </head>
 <body>
-<header class="topbar">
+<header class="topbar premium-topbar">
   <div class="brand">
     <img src="../logo-kmo.png" alt="KMO Gestão" class="logo">
-    <div><strong>KMO Driver</strong><small>Gestão e georreferenciamento de rotas</small></div>
+    <div><strong>KMO DRIVE</strong><small>Gestão • Rotas • Georreferenciamento</small></div>
   </div>
   <span id="onlineBadge" class="badge">● Online</span>
 </header>
 
-<nav class="tabs">
+<nav class="tabs premium-tabs">
   <button class="tab active" data-tab="driver">🚐 Motorista</button>
   <button class="tab" data-tab="admin">📍 Central KMO</button>
-  <a class="calc-nav" href="../" title="Abrir Calculadora de KM">🧮 Calculadora KM</a>
+  <a class="calc-nav" href="../" title="Abrir a Calculadora KMO">🧮 Calculadora KM</a>
 </nav>
 
 <main>
 <section id="driver" class="page active">
   <div id="noActiveTrip">
-    <div class="hero card">
-      <div>
-        <span class="eyebrow">KMO GESTÃO</span>
-        <h1>Iniciar rota</h1>
-        <p>Selecione o motorista e a rota. Ao iniciar, o GPS registra automaticamente o trajeto, quilômetros, tempo, velocidade e coordenadas.</p>
+    <div class="premium-start-grid">
+      <div class="brand-showcase card">
+        <div class="brand-wave"></div>
+        <div class="device-scene">
+          <div class="device tablet-device">
+            <div class="device-screen">
+              <img src="../logo-kmo.png" alt="KMO" class="screen-logo">
+              <strong>KMO DRIVE</strong>
+              <small>KMO GESTÃO</small>
+            </div>
+          </div>
+          <div class="device phone-device">
+            <div class="device-screen">
+              <img src="../logo-kmo.png" alt="KMO" class="screen-logo phone-logo">
+              <strong>KMO DRIVE</strong>
+              <small>KMO GESTÃO</small>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-copy">
+          <span class="eyebrow">KMO GESTÃO</span>
+          <h1>Controle profissional das rotas</h1>
+          <p>GPS, quilômetros, tempo, velocidade e histórico georreferenciado em uma única operação.</p>
+        </div>
       </div>
-      <div class="hero-icon">🚐</div>
+
+      <div class="route-launch card">
+        <div class="launch-head"><span>☰</span><strong>Route Start</strong><span>📍</span></div>
+        <div class="route-summary">
+          <div class="route-summary-title"><span>🚚</span><strong id="previewRouteName">Selecione uma rota</strong></div>
+          <div class="summary-line"><span>DESTINO</span><strong id="previewDestination">—</strong></div>
+          <div class="summary-split">
+            <div><span>KM PREVISTOS</span><strong id="previewExpectedKm">—</strong></div>
+            <div><span>TURNO</span><strong id="previewShift">—</strong></div>
+          </div>
+        </div>
+
+        <div class="mascot-zone">
+          <div class="mascot-badge">🐺</div>
+          <div><strong>KMO DRIVER</strong><p>Pronto para iniciar sua rota</p></div>
+        </div>
+
+        <div class="route-fields">
+          <label>Motorista<select id="tripDriver"></select></label>
+          <label>Rota<select id="tripRoute"></select></label>
+        </div>
+        <button id="startTrip" class="btn primary big gold-start">INICIAR ROTA</button>
+        <p class="hint center-hint">Permita o acesso ao GPS. A posição inicial será registrada automaticamente.</p>
+      </div>
     </div>
 
-    <div class="card start-card">
-      <h2>Dados da rota</h2>
-      <div class="grid2">
-        <label>Motorista<select id="tripDriver"></select></label>
-        <label>Rota<select id="tripRoute"></select></label>
-      </div>
-      <button id="startTrip" class="btn primary big start-route">▶ INICIAR ROTA</button>
-      <p class="hint">Ao tocar em iniciar, permita o acesso à localização do celular. A posição inicial será registrada antes da viagem começar.</p>
+    <div class="quick-actions">
+      <a class="quick-card" href="../"><span class="quick-icon">🧮</span><div><strong>Calculadora KM</strong><small>Calcular tarifa e deslocamento</small></div><b>›</b></a>
+      <div class="quick-card"><span class="quick-icon">📍</span><div><strong>Georreferenciamento</strong><small>GPS e trilha da rota</small></div><b>✓</b></div>
+      <div class="quick-card"><span class="quick-icon">📊</span><div><strong>Relatórios</strong><small>KM, horas e execuções</small></div><b>✓</b></div>
     </div>
 
-    <div class="card">
-      <div class="section-head"><h2>Cadastros</h2><span class="pill">Configuração inicial</span></div>
+    <div class="card setup-panel">
+      <div class="section-head"><div><span class="eyebrow">CONFIGURAÇÃO</span><h2>Cadastros operacionais</h2></div><span class="pill">Faça uma vez</span></div>
       <details open>
         <summary>Cadastrar motorista e veículo</summary>
         <form id="driverForm" class="form-grid">
@@ -83,10 +118,17 @@
   </div>
 
   <div id="activeTrip" class="hidden">
-    <div class="trip-status card live">
+    <div class="drive-toolbar card">
+      <div class="speed-medallion"><span>KM</span><strong id="liveKmTop">0,00</strong></div>
+      <div class="drive-brand">
+        <img src="../logo-kmo.png" alt="KMO" class="drive-logo">
+        <div><strong id="activeRouteName">—</strong><small id="activeDriverName">—</small></div>
+      </div>
+      <div class="eta-box"><span>TEMPO</span><strong id="liveTimeTop">00:00:00</strong></div>
+    </div>
+
+    <div class="trip-status card live premium-live">
       <div class="live-row"><span class="live-dot"></span><strong>ROTA EM ANDAMENTO</strong><span id="gpsStatus">Obtendo GPS...</span></div>
-      <h1 id="activeRouteName">—</h1>
-      <p id="activeDriverName">—</p>
       <div class="metrics">
         <div><span>KM RODADOS</span><strong id="liveKm">0,00</strong></div>
         <div><span>TEMPO</span><strong id="liveTime">00:00:00</strong></div>
@@ -95,9 +137,9 @@
       <div class="gps-box"><span id="liveCoords">Aguardando coordenadas...</span><span id="liveAccuracy"></span></div>
     </div>
 
-    <div class="card map-card">
+    <div class="card map-card premium-map-card">
       <div class="section-head">
-        <div><span class="eyebrow map-eyebrow">GEOREFERENCIAMENTO</span><h2>Acompanhamento da rota</h2></div>
+        <div><span class="eyebrow map-eyebrow">MAPA KMO</span><h2>Acompanhamento georreferenciado</h2></div>
         <div class="map-actions"><button id="centerDriverMap" class="btn ghost">◎ Centralizar</button><button id="openCurrentMap" class="btn ghost">↗ Abrir posição</button></div>
       </div>
       <div id="driverMap" class="route-map"></div>
@@ -110,14 +152,15 @@
 
     <div class="card danger-zone">
       <button id="finishTrip" class="btn danger big">■ ENCERRAR ROTA</button>
-      <p class="hint">O encerramento salva o horário inicial e final, duração, quilômetros e o histórico georreferenciado do trajeto.</p>
+      <p class="hint">Ao encerrar, o sistema salva horário inicial/final, duração, quilômetros e histórico do trajeto.</p>
     </div>
   </div>
 </section>
 
 <section id="admin" class="page">
-  <div id="adminLock" class="card lock-card">
-    <div class="lock-icon">🔐</div><h1>Central KMO</h1><p>Digite o PIN para acessar o acompanhamento e os relatórios.</p>
+  <div id="adminLock" class="card lock-card premium-lock">
+    <img src="../logo-kmo.png" alt="KMO" class="lock-logo">
+    <h1>Central KMO</h1><p>Acesso aos mapas, indicadores e relatórios.</p>
     <div class="pin-row"><input id="adminPin" type="password" inputmode="numeric" maxlength="8" placeholder="PIN"><button id="unlockAdmin" class="btn primary">Entrar</button></div>
     <small>PIN inicial: 2026</small>
   </div>
@@ -125,14 +168,14 @@
   <div id="adminPanel" class="hidden">
     <div class="section-head page-title"><div><span class="eyebrow">CENTRAL KMO</span><h1>Acompanhamento e relatórios</h1></div><button id="lockAdmin" class="btn ghost">Sair</button></div>
 
-    <div class="cards4">
-      <div class="stat card"><span>KM NO PERÍODO</span><strong id="weekKm">0,00</strong><small>quilômetros</small></div>
+    <div class="cards4 premium-stats">
+      <div class="stat card"><span>KMS TOTAIS</span><strong id="weekKm">0,00</strong><small>quilômetros</small></div>
       <div class="stat card"><span>HORAS EM ROTA</span><strong id="weekHours">0h00</strong><small>tempo total</small></div>
       <div class="stat card"><span>ROTAS</span><strong id="weekTrips">0</strong><small>execuções</small></div>
       <div class="stat card"><span>PONTOS GPS</span><strong id="weekGpsPoints">0</strong><small>registros</small></div>
     </div>
 
-    <div class="card map-card">
+    <div class="card map-card premium-map-card">
       <div class="section-head">
         <div><span class="eyebrow map-eyebrow">AO VIVO</span><h2>Acompanhamento georreferenciado</h2></div>
         <span id="adminLiveBadge" class="pill">Sem rota ativa</span>
@@ -165,7 +208,7 @@
       <h2>Configurações locais</h2>
       <div class="grid2"><label>Valor padrão por KM (R$)<input id="valuePerKm" type="number" step="0.01" min="0"></label><label>Novo PIN administrativo<input id="newPin" type="password" inputmode="numeric" maxlength="8"></label></div>
       <button id="saveSettings" class="btn">Salvar configurações</button>
-      <p class="hint">Nesta versão GitHub Pages, os dados e o acompanhamento ficam neste aparelho. Para a Central KMO acompanhar vários motoristas simultaneamente em outros celulares, será necessário conectar esta tela a um banco online em uma próxima etapa.</p>
+      <p class="hint">Os dados desta versão ficam neste aparelho. Uma central multi-motorista em aparelhos diferentes exigirá banco online.</p>
     </div>
   </div>
 </section>
@@ -174,5 +217,25 @@
 <div id="toast" class="toast"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script src="./app.js"></script>
+<script>
+(function(){
+  function syncLive(){
+    var a=document.getElementById('liveKm'),b=document.getElementById('liveKmTop'),c=document.getElementById('liveTime'),d=document.getElementById('liveTimeTop');
+    if(a&&b)b.textContent=a.textContent;if(c&&d)d.textContent=c.textContent;
+  }
+  function syncPreview(){
+    try{
+      var sel=document.getElementById('tripRoute');if(!sel)return;
+      var id=sel.value,r=(typeof db!=='undefined'&&db.routes)?db.routes.find(function(x){return x.id===id}):null;
+      document.getElementById('previewRouteName').textContent=r?r.name:'Selecione uma rota';
+      document.getElementById('previewDestination').textContent=r?(r.destination||r.description||'—'):'—';
+      document.getElementById('previewExpectedKm').textContent=r&&r.expectedKm?(r.expectedKm+' km'):'—';
+      document.getElementById('previewShift').textContent=r?(r.shift||'—'):'—';
+    }catch(e){}
+  }
+  document.addEventListener('change',function(e){if(e.target&&e.target.id==='tripRoute')syncPreview()});
+  setInterval(syncLive,1000);setTimeout(syncPreview,700);
+})();
+</script>
 </body>
 </html>
