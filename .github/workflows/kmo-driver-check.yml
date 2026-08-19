@@ -1,0 +1,38 @@
+name: KMO Driver - Verificacao
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kmo-driver/**'
+      - 'railway.toml'
+      - '.github/workflows/kmo-driver-check.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Iniciar KMO Driver e testar API
+        run: |
+          cd kmo-driver
+          python bootstrap.py > /tmp/kmo-driver.log 2>&1 &
+          PID=$!
+          for i in {1..25}; do
+            if curl -fsS http://127.0.0.1:8000/api/health; then
+              kill $PID || true
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/kmo-driver.log
+          kill $PID || true
+          exit 1
