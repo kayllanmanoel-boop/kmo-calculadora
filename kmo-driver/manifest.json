@@ -1,0 +1,13 @@
+{
+  "name": "KMO Driver — Rotas Escolares",
+  "short_name": "KMO Driver",
+  "description": "Sistema KMO Gestão para motoristas, GPS, quilometragem e relatórios de rotas escolares.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f9",
+  "theme_color": "#0b1220",
+  "icons": [
+    {"src":"../logo-kmo.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
