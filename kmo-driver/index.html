@@ -1,2 +1,245 @@
 <!doctype html>
-<html><body>restore marker 4</body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0c3b86">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>KMO Drive — Gestão de Rotas</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./geo.css">
+  <style>
+    .new-kmo-logo{display:block;background-image:url('data:image/webp;base64,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');background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#fff;border-radius:50%;}
+    .mascot-badge.new-kmo-logo{font-size:0;}
+  </style>
+</head>
+<body>
+<header class="topbar premium-topbar">
+  <div class="brand">
+    <span class="logo new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+    <div><strong>KMO DRIVE</strong><small>Gestão • Rotas • Georreferenciamento</small></div>
+  </div>
+  <span id="onlineBadge" class="badge">● Online</span>
+</header>
+
+<nav class="tabs premium-tabs">
+  <button class="tab active" data-tab="driver">🚐 Motorista</button>
+  <button class="tab" data-tab="admin">📍 Central KMO</button>
+  <a class="calc-nav" href="../" title="Abrir a Calculadora KMO">🧮 Calculadora KM</a>
+</nav>
+
+<main>
+<section id="driver" class="page active">
+  <div id="noActiveTrip">
+    <div class="premium-start-grid">
+      <div class="brand-showcase card">
+        <div class="brand-wave"></div>
+        <div class="device-scene">
+          <div class="device tablet-device">
+            <div class="device-screen">
+              <span class="screen-logo new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+              <strong>KMO DRIVE</strong>
+              <small>KMO GESTÃO</small>
+            </div>
+          </div>
+          <div class="device phone-device">
+            <div class="device-screen">
+              <span class="screen-logo phone-logo new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+              <strong>KMO DRIVE</strong>
+              <small>KMO GESTÃO</small>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-copy">
+          <span class="eyebrow">KMO GESTÃO</span>
+          <h1>Controle profissional das rotas</h1>
+          <p>GPS, quilômetros, tempo, velocidade e histórico georreferenciado em uma única operação.</p>
+        </div>
+      </div>
+
+      <div class="route-launch card">
+        <div class="launch-head"><span>☰</span><strong>Route Start</strong><span>📍</span></div>
+        <div class="route-summary">
+          <div class="route-summary-title"><span>🚚</span><strong id="previewRouteName">Selecione uma rota</strong></div>
+          <div class="summary-line"><span>DESTINO</span><strong id="previewDestination">—</strong></div>
+          <div class="summary-split">
+            <div><span>KM PREVISTOS</span><strong id="previewExpectedKm">—</strong></div>
+            <div><span>TURNO</span><strong id="previewShift">—</strong></div>
+          </div>
+        </div>
+
+        <div class="mascot-zone">
+          <span class="mascot-badge new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+          <div><strong>KMO DRIVER</strong><p>Pronto para iniciar sua rota</p></div>
+        </div>
+
+        <div class="route-fields">
+          <label>Motorista<select id="tripDriver"></select></label>
+          <label>Rota<select id="tripRoute"></select></label>
+        </div>
+        <button id="startTrip" class="btn primary big gold-start">INICIAR ROTA</button>
+        <p class="hint center-hint">Permita o acesso ao GPS. A posição inicial será registrada automaticamente.</p>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <a class="quick-card" href="../"><span class="quick-icon">🧮</span><div><strong>Calculadora KM</strong><small>Calcular tarifa e deslocamento</small></div><b>›</b></a>
+      <div class="quick-card"><span class="quick-icon">📍</span><div><strong>Georreferenciamento</strong><small>GPS e trilha da rota</small></div><b>✓</b></div>
+      <div class="quick-card"><span class="quick-icon">📊</span><div><strong>Relatórios</strong><small>KM, horas e execuções</small></div><b>✓</b></div>
+    </div>
+
+    <div class="card setup-panel">
+      <div class="section-head"><div><span class="eyebrow">CONFIGURAÇÃO</span><h2>Cadastros operacionais</h2></div><span class="pill">Faça uma vez</span></div>
+      <details open>
+        <summary>Cadastrar motorista e veículo</summary>
+        <form id="driverForm" class="form-grid">
+          <label>Nome completo<input id="drvName" required></label>
+          <label>Telefone<input id="drvPhone" inputmode="tel"></label>
+          <label>CNH<input id="drvCnh"></label>
+          <label>Veículo<input id="drvVehicle" placeholder="Ex.: Spin LTZ"></label>
+          <label>Placa<input id="drvPlate" maxlength="8" placeholder="ABC1D23"></label>
+          <label>Capacidade<input id="drvCapacity" type="number" min="1" value="5"></label>
+          <button class="btn" type="submit">Salvar motorista</button>
+        </form>
+      </details>
+      <details>
+        <summary>Cadastrar rota</summary>
+        <form id="routeForm" class="form-grid">
+          <label>Nome da rota<input id="routeName" required placeholder="Rota 01 — Manhã"></label>
+          <label>Escola / contrato<input id="routeSchool"></label>
+          <label>Turno<select id="routeShift"><option>Manhã</option><option>Tarde</option><option>Noite</option><option>Integral</option></select></label>
+          <label>KM previstos<input id="routeExpectedKm" type="number" min="0" step="0.1"></label>
+          <label>Origem<input id="routeOrigin" placeholder="Ex.: Escola / garagem"></label>
+          <label>Destino<input id="routeDestination" placeholder="Ex.: localidades atendidas"></label>
+          <label class="wide">Descrição da rota<textarea id="routeDescription" rows="2" placeholder="Bairros, localidades, referências e observações"></textarea></label>
+          <button class="btn" type="submit">Salvar rota</button>
+        </form>
+      </details>
+    </div>
+  </div>
+
+  <div id="activeTrip" class="hidden">
+    <div class="drive-toolbar card">
+      <div class="speed-medallion"><span>KM</span><strong id="liveKmTop">0,00</strong></div>
+      <div class="drive-brand">
+        <span class="drive-logo new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+        <div><strong id="activeRouteName">—</strong><small id="activeDriverName">—</small></div>
+      </div>
+      <div class="eta-box"><span>TEMPO</span><strong id="liveTimeTop">00:00:00</strong></div>
+    </div>
+
+    <div class="trip-status card live premium-live">
+      <div class="live-row"><span class="live-dot"></span><strong>ROTA EM ANDAMENTO</strong><span id="gpsStatus">Obtendo GPS...</span></div>
+      <div class="metrics">
+        <div><span>KM RODADOS</span><strong id="liveKm">0,00</strong></div>
+        <div><span>TEMPO</span><strong id="liveTime">00:00:00</strong></div>
+        <div><span>VELOCIDADE</span><strong id="liveSpeed">0 km/h</strong></div>
+      </div>
+      <div class="gps-box"><span id="liveCoords">Aguardando coordenadas...</span><span id="liveAccuracy"></span></div>
+    </div>
+
+    <div class="card map-card premium-map-card">
+      <div class="section-head">
+        <div><span class="eyebrow map-eyebrow">MAPA KMO</span><h2>Acompanhamento georreferenciado</h2></div>
+        <div class="map-actions"><button id="centerDriverMap" class="btn ghost">◎ Centralizar</button><button id="openCurrentMap" class="btn ghost">↗ Abrir posição</button></div>
+      </div>
+      <div id="driverMap" class="route-map"></div>
+      <div class="map-info-grid">
+        <div><span>Pontos GPS</span><strong id="gpsPoints">0</strong></div>
+        <div><span>Última atualização</span><strong id="lastGpsUpdate">—</strong></div>
+        <div><span>Início</span><strong id="tripStartCoord">—</strong></div>
+      </div>
+    </div>
+
+    <div class="card danger-zone">
+      <button id="finishTrip" class="btn danger big">■ ENCERRAR ROTA</button>
+      <p class="hint">Ao encerrar, o sistema salva horário inicial/final, duração, quilômetros e histórico do trajeto.</p>
+    </div>
+  </div>
+</section>
+
+<section id="admin" class="page">
+  <div id="adminLock" class="card lock-card premium-lock">
+    <span class="lock-logo new-kmo-logo" role="img" aria-label="KMO Gestão"></span>
+    <h1>Central KMO</h1><p>Acesso aos mapas, indicadores e relatórios.</p>
+    <div class="pin-row"><input id="adminPin" type="password" inputmode="numeric" maxlength="8" placeholder="PIN"><button id="unlockAdmin" class="btn primary">Entrar</button></div>
+    <small>PIN inicial: 2026</small>
+  </div>
+
+  <div id="adminPanel" class="hidden">
+    <div class="section-head page-title"><div><span class="eyebrow">CENTRAL KMO</span><h1>Acompanhamento e relatórios</h1></div><button id="lockAdmin" class="btn ghost">Sair</button></div>
+
+    <div class="cards4 premium-stats">
+      <div class="stat card"><span>KMS TOTAIS</span><strong id="weekKm">0,00</strong><small>quilômetros</small></div>
+      <div class="stat card"><span>HORAS EM ROTA</span><strong id="weekHours">0h00</strong><small>tempo total</small></div>
+      <div class="stat card"><span>ROTAS</span><strong id="weekTrips">0</strong><small>execuções</small></div>
+      <div class="stat card"><span>PONTOS GPS</span><strong id="weekGpsPoints">0</strong><small>registros</small></div>
+    </div>
+
+    <div class="card map-card premium-map-card">
+      <div class="section-head">
+        <div><span class="eyebrow map-eyebrow">AO VIVO</span><h2>Acompanhamento georreferenciado</h2></div>
+        <span id="adminLiveBadge" class="pill">Sem rota ativa</span>
+      </div>
+      <div id="adminMapWrap">
+        <div id="adminMap" class="route-map admin-map"></div>
+        <div class="live-summary">
+          <div><span>Motorista</span><strong id="adminLiveDriver">—</strong></div>
+          <div><span>Rota</span><strong id="adminLiveRoute">—</strong></div>
+          <div><span>KM</span><strong id="adminLiveKm">0,00</strong></div>
+          <div><span>Tempo</span><strong id="adminLiveTime">00:00:00</strong></div>
+          <div><span>Coordenadas</span><strong id="adminLiveCoords">—</strong></div>
+          <div><span>Precisão</span><strong id="adminLiveAccuracy">—</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-head"><h2>Relatório semanal</h2><div class="filters"><label>De<input id="reportFrom" type="date"></label><label>Até<input id="reportTo" type="date"></label><button id="applyReport" class="btn">Atualizar</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Data</th><th>Motorista</th><th>Rota</th><th>Início</th><th>Fim</th><th>Duração</th><th>KM</th><th>GPS</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+      <div class="actions"><button id="exportCsv" class="btn">⬇ Exportar CSV</button><button id="backupJson" class="btn ghost">💾 Backup JSON</button><label class="btn ghost file-label">📂 Importar backup<input id="importJson" type="file" accept="application/json"></label></div>
+    </div>
+
+    <div class="grid2 admin-grid">
+      <div class="card"><div class="section-head"><h2>Motoristas</h2><span id="driversTotal" class="pill"></span></div><div id="driversList" class="list"></div></div>
+      <div class="card"><div class="section-head"><h2>Rotas</h2><span id="routesTotal" class="pill"></span></div><div id="routesList" class="list"></div></div>
+    </div>
+
+    <div class="card settings-card">
+      <h2>Configurações locais</h2>
+      <div class="grid2"><label>Valor padrão por KM (R$)<input id="valuePerKm" type="number" step="0.01" min="0"></label><label>Novo PIN administrativo<input id="newPin" type="password" inputmode="numeric" maxlength="8"></label></div>
+      <button id="saveSettings" class="btn">Salvar configurações</button>
+      <p class="hint">Os dados desta versão ficam neste aparelho. Uma central multi-motorista em aparelhos diferentes exigirá banco online.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="toast" class="toast"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="./app.js"></script>
+<script>
+(function(){
+  function syncLive(){
+    var a=document.getElementById('liveKm'),b=document.getElementById('liveKmTop'),c=document.getElementById('liveTime'),d=document.getElementById('liveTimeTop');
+    if(a&&b)b.textContent=a.textContent;if(c&&d)d.textContent=c.textContent;
+  }
+  function syncPreview(){
+    try{
+      var sel=document.getElementById('tripRoute');if(!sel)return;
+      var id=sel.value,r=(typeof db!=='undefined'&&db.routes)?db.routes.find(function(x){return x.id===id}):null;
+      document.getElementById('previewRouteName').textContent=r?r.name:'Selecione uma rota';
+      document.getElementById('previewDestination').textContent=r?(r.destination||r.description||'—'):'—';
+      document.getElementById('previewExpectedKm').textContent=r&&r.expectedKm?(r.expectedKm+' km'):'—';
+      document.getElementById('previewShift').textContent=r?(r.shift||'—'):'—';
+    }catch(e){}
+  }
+  document.addEventListener('change',function(e){if(e.target&&e.target.id==='tripRoute')syncPreview()});
+  setInterval(syncLive,1000);setTimeout(syncPreview,700);
+})();
+</script>
+</body>
+</html>
