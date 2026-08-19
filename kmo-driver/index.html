@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./geo.css">
+  <style>
+    .calc-nav{display:flex;align-items:center;justify-content:center;flex:1;max-width:240px;padding:15px 14px;font-weight:800;color:#667085;text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}.calc-nav:hover{color:#0b1220;background:#f8fafc;border-color:#d8ad5a}@media(max-width:520px){.calc-nav{padding:13px 7px;font-size:11px}}
+  </style>
 </head>
 <body>
 <header class="topbar">
@@ -24,6 +27,7 @@
 <nav class="tabs">
   <button class="tab active" data-tab="driver">🚐 Motorista</button>
   <button class="tab" data-tab="admin">📍 Central KMO</button>
+  <a class="calc-nav" href="../" title="Abrir Calculadora de KM">🧮 Calculadora KM</a>
 </nav>
 
 <main>
