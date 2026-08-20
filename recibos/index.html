@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KMO | Recibo e Requerimento</title>
+<meta name="theme-color" content="#073b86">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--azul:#073b86;--azul2:#0b56b4;--ouro:#c8a34a;--bg:#f4f7fb;--txt:#172033;--muted:#617089;--line:#d8e0eb}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt)}header{background:linear-gradient(120deg,var(--azul),var(--azul2));color:#fff}.head{max-width:1080px;margin:auto;padding:22px 18px;display:flex;align-items:center;gap:16px}.head img{width:72px;height:72px;object-fit:contain;border-radius:50%;background:#fff}.head h1{font-size:24px;margin:0 0 4px}.head p{margin:0;opacity:.9}.wrap{max-width:1080px;margin:22px auto;padding:0 16px}.card{background:#fff;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 10px 30px #0a2b5512}.drop{display:block;border:2px dashed #aab8cc;border-radius:16px;padding:34px 18px;text-align:center;background:#f9fbff;cursor:pointer}.drop:hover{border-color:var(--azul)}#file{display:none}.small{font-size:12px;color:var(--muted)}.status{margin-top:14px;padding:12px 14px;border-radius:10px;background:#edf6ef;color:#27663a}.hidden{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.wide{grid-column:1/-1}label span{display:block;font-size:12px;font-weight:700;color:#536177;margin-bottom:5px}input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;font:inherit;background:#fff}textarea{min-height:78px;resize:vertical}.check{display:flex;align-items:center;gap:8px;margin-top:11px;font-size:13px}.check input{width:auto}.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:700;cursor:pointer}.primary{background:var(--azul);color:#fff}.gold{background:var(--ouro);color:#172033}.soft{background:#eaf1fc;color:#073b86}.tip{border-left:4px solid var(--ouro);padding:10px 12px;background:#fffaf0;border-radius:8px}.footer{text-align:center;color:#738097;font-size:12px;padding:8px 0 28px}@media(max-width:720px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.head img{width:58px;height:58px}.head h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="head"><img src="../logo-kmo.png" alt="KMO"><div><h1>KMO — Gerador de Recibo e Requerimento</h1><p>Anexe a NFS-e em PDF, confira os dados e gere os documentos.</p></div></div></header>
+<main class="wrap">
+<section class="card"><h2>1. Anexar Nota Fiscal</h2><label class="drop" for="file"><strong>Clique aqui para selecionar a NFS-e em PDF</strong><br><span class="small">O arquivo é processado no seu navegador.</span></label><input id="file" type="file" accept="application/pdf"><div id="status" class="status hidden"></div></section>
+<section id="dados" class="card hidden"><h2>2. Conferir os dados</h2><div class="grid">
+<label><span>Nº da NFS-e</span><input id="nf"></label><label><span>Data de emissão</span><input id="emissao" placeholder="dd/mm/aaaa"></label>
+<label class="wide"><span>Tomador / órgão</span><input id="tomador"></label><label><span>CNPJ/CPF do tomador</span><input id="cnpjTomador"></label><label><span>Município / UF</span><input id="municipio"></label>
+<label class="wide"><span>Descrição do serviço</span><textarea id="descricao"></textarea></label><label><span>Valor total</span><input id="valor" placeholder="R$ 0,00"></label><label><span>Ano do recibo</span><input id="ano"></label>
+<label><span>Banco</span><input id="banco" value="BANCO BRADESCO"></label><label><span>Agência</span><input id="agencia" value="0726"></label><label><span>Conta</span><input id="conta" value="15498-9"></label><label class="wide"><span>Representante</span><input id="rep" value="KAYLLON MANOEL OLIVEIRA DA SILVA"></label>
+</div>
+<label class="check"><input id="blankRecibo" type="checkbox" checked> Deixar a data do recibo em branco</label>
+<label class="check"><input id="dateReq" type="checkbox" checked> Usar a data de emissão da NFS-e no requerimento</label>
+<div class="buttons"><button class="btn primary" onclick="gerar('recibo')">Gerar Recibo</button><button class="btn gold" onclick="gerar('requerimento')">Gerar Requerimento</button><button class="btn soft" onclick="gerarAmbos()">Gerar os dois</button></div></section>
+<section class="card"><div class="tip"><strong>Como usar:</strong> anexe a nota, confira os dados extraídos e clique no documento desejado. Se algum campo não for localizado automaticamente, você pode corrigi-lo antes de gerar o PDF.</div></section>
+</main><div class="footer">K M O Gestão LTDA – EPP • CNPJ 34.655.687/0001-15</div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=id=>document.getElementById(id), file=$('file'), statusEl=$('status');
+const EMPRESA='K M O GESTÃO LTDA - EPP', CNPJ='34.655.687/0001-15', ENDERECO='Tv. Benjamin Cavalcante, nº 123, Bairro Nenê Plácido, Tianguá - CE';
+const meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function status(t,ok=true){statusEl.textContent=t;statusEl.classList.remove('hidden');statusEl.style.background=ok?'#edf6ef':'#fff0ef';statusEl.style.color=ok?'#27663a':'#9c2b25'}
+function clean(s){return (s||'').replace(/[ \t]+/g,' ').replace(/\n +/g,'\n').trim()}
+function moneyToNumber(v){v=String(v||'').replace(/R\$|\s/g,''); if(v.includes(',')) v=v.replace(/\./g,'').replace(',','.'); return Number(v)||0}
+function brl(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function cap(s){return clean(s).replace(/\s+/g,' ')}
+function first(re,t){const m=t.match(re);return m?cap(m[1]):''}
+function block(t,a,b){const i=t.search(a);if(i<0)return'';const tail=t.slice(i);const m=tail.match(b);return m?tail.slice(0,m.index):tail}
+function parse(text){
+ const t=clean(text), u=t.toUpperCase();
+ let nf=first(/N[ÚU]MERO DA NFS-E\s*\n?\s*(\d{1,12})/i,t)||first(/N[º°]?\s*NFS-E\s*[:\-]?\s*(\d+)/i,t);
+ let emissao=first(/DATA E HORA DA EMISS[AÃ]O DA NFS-E\s*\n?\s*(\d{2}\/\d{2}\/\d{4})/i,t)||first(/COMPET[EÊ]NCIA DA NFS-E\s*\n?\s*(\d{2}\/\d{2}\/\d{4})/i,t);
+ const bt=block(t,/TOMADOR\s*\/\s*ADQUIRENTE/i,/DESTINAT[ÁA]RIO DA OPERA[ÇC][ÃA]O|INTERMEDI[ÁA]RIO DA OPERA[ÇC][ÃA]O|SERVI[ÇC]O PRESTADO/i);
+ let cnpj=first(/CNPJ\s*\/\s*CPF\s*\/\s*NIF\s*\n?\s*([0-9.\/-]{11,20})/i,bt);
+ let tomador=first(/NOME\s*\/\s*NOME EMPRESARIAL\s*\n?\s*([^\n]+)/i,bt);
+ let municipio=first(/MUNIC[ÍI]PIO\s*\/\s*SIGLA UF\s*\n?\s*([^\n]+)/i,bt);
+ let descricao=first(/DESCRI[ÇC][ÃA]O DO SERVI[ÇC]O\s*\n?\s*([\s\S]*?)(?=TRIBUTA[ÇC][ÃA]O MUNICIPAL|ISSQN|TRIBUTA[ÇC][ÃA]O FEDERAL)/i,t);
+ descricao=cap(descricao);
+ let val=first(/VALOR DA OPERA[ÇC][ÃA]O\s*\/\s*SERVI[ÇC]O\s*\n?\s*(R\$\s*[\d.]+,\d{2})/i,t)||first(/VALOR L[ÍI]QUIDO DA NFS-E\s*\n?\s*(R\$\s*[\d.]+,\d{2})/i,t)||first(/BC ISSQN\s*\n?\s*(R\$\s*[\d.]+,\d{2})/i,t);
+ if(!nf) nf=first(/\bNFS-E\b[^\d]{0,30}(\d{3,12})/i,t);
+ return{nf,emissao,tomador,cnpj,municipio,descricao,valor:val};
+}
+file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;status('Lendo a nota fiscal...');try{const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let all='';for(let p=1;p<=pdf.numPages;p++){const page=await pdf.getPage(p), c=await page.getTextContent();all+=c.items.map(x=>x.str).join('\n')+'\n';}const d=parse(all);$('nf').value=d.nf;$('emissao').value=d.emissao;$('tomador').value=d.tomador;$('cnpjTomador').value=d.cnpj;$('municipio').value=d.municipio;$('descricao').value=d.descricao;$('valor').value=d.valor;$('ano').value=(d.emissao.match(/\d{4}$/)||[new Date().getFullYear()])[0];$('dados').classList.remove('hidden');status('Nota lida. Confira os dados antes de gerar os documentos.');}catch(e){console.error(e);status('Não foi possível ler automaticamente este PDF. Tente outro arquivo ou use uma NFS-e com texto selecionável.',false)}});
+const U=['','UM','DOIS','TRÊS','QUATRO','CINCO','SEIS','SETE','OITO','NOVE','DEZ','ONZE','DOZE','TREZE','QUATORZE','QUINZE','DEZESSEIS','DEZESSETE','DEZO
