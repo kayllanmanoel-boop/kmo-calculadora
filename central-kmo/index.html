@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06132f">
+  <meta name="description" content="Acesso centralizado aos aplicativos e sistemas digitais da KMO Gestão.">
+  <title>Central de Aplicativos KMO Gestão</title>
+  <link rel="icon" href="/logo-kmo.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/" aria-label="Central KMO">
+        <img src="/logo-kmo.png" alt="Logomarca KMO Gestão">
+        <span><strong>KMO GESTÃO</strong><small>Central de Aplicativos</small></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="secure">● Ambiente centralizado</span>
+        <a class="contact" href="mailto:kmo.gestao@gmail.com">Falar com a KMO</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="shell">
+      <section class="intro">
+        <div>
+          <span class="eyebrow">Tecnologia KMO</span>
+          <h1>Todos os aplicativos da <em>KMO Gestão</em> em um só lugar.</h1>
+          <p>Escolha uma solução, clique no cartão e acesse o sistema. Os aplicativos disponíveis abrem imediatamente; os demais serão liberados à medida que forem publicados.</p>
+        </div>
+        <aside class="summary" aria-label="Resumo dos aplicativos">
+          <img src="/logo-kmo.png" alt="">
+          <div><strong id="totalApps">10</strong><span>aplicativos cadastrados</span></div>
+          <i></i>
+          <div><strong id="liveApps">4</strong><span>disponíveis agora</span></div>
+        </aside>
+      </section>
+
+      <section class="launcher">
+        <div class="launcher-head">
+          <div><span class="kicker">Acesso rápido</span><h2>Escolha um aplicativo</h2></div>
+          <label class="search">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="Buscar aplicativo..." autocomplete="off">
+          </label>
+        </div>
+
+        <div class="filters" id="filters" aria-label="Categorias">
+          <button class="active" data-category="Todos">Todos</button>
+          <button data-category="Documentos">Documentos</button>
+          <button data-category="Logística">Logística</button>
+          <button data-category="Sustentabilidade">Sustentabilidade</button>
+          <button data-category="Educação">Educação</button>
+          <button data-category="Gestão">Gestão</button>
+        </div>
+
+        <div class="app-grid" id="appGrid">
+          <a class="app-card featured" data-category="Gestão" data-name="buffet terceirização eventos cardápios estoque" href="https://kmo-buffet-gestao.kayllan-manoel.chatgpt.site" target="_blank" rel="noreferrer">
+            <div class="card-top"><span class="app-icon chef">🍽️</span><span class="status available"><i></i>Disponível</span></div>
+            <span class="category">Gestão</span><h3>Buffet &amp; Terceirização</h3><p>Clientes, eventos, cardápios, equipe, fornecedores, estoque e gestão financeira.</p>
+            <span class="action">Acessar aplicativo <b>→</b></span>
+          </a>
+
+          <a class="app-card featured" data-category="Documentos" data-name="recibo requerimento nota fiscal nfse documentos" href="/apps/recibos/">
+            <div class="card-top"><span class="app-icon receipt">📄</span><span class="status available"><i></i>Disponível</span></div>
+            <span class="category">Documentos</span><h3>Recibo &amp; Requerimento</h3><p>Anexe a NFS-e, confira os dados e gere os documentos no padrão visual da KMO.</p>
+            <span class="action">Acessar aplicativo <b>→</b></span>
+          </a>
+
+          <a class="app-card featured" data-category="Logística" data-name="calculadora deslocamento rotas tarifa quilometro" href="/apps/calculadora/">
+            <div class="card-top"><span class="app-icon route">🧭</span><span class="status available"><i></i>Disponível</span></div>
+            <span class="category">Logística</span><h3>Calculadora de Rotas</h3><p>Calcule distância, viagens, capacidade do veículo e valor estimado por quilômetro.</p>
+            <span class="action">Acessar aplicativo <b>→</b></span>
+          </a>
+
+          <a class="app-card" data-category="Logística" data-name="motorista rotas escolares viagens quilometragem" href="/apps/motorista/">
+            <div class="card-top"><span class="app-icon driver">🚐</span><span class="status available"><i></i>Disponível</span></div>
+            <span class="category">Logística</span><h3>Motorista &amp; Rotas</h3><p>Inicie e encerre rotas, registre entregas, quilometragem e relatórios semanais.</p>
+            <span class="action">Acessar aplicativo <b>→</b></span>
+          </a>
+
+          <article class="app-card pending" data-category="Sustentabilidade" data-name="coleta seletiva pontos catador morador loja reciclagem">
+            <div class="card-top"><span class="app-icon recycle">♻️</span><span class="status publishing"><i></i>Em preparação</span></div>
+            <span class="category">Sustentabilidade</span><h3>Coleta Seletiva</h3><p>Administração, catadores, moradores e lojas, com pontos por quilo coletado.</p>
+            <span class="action">Publicação em andamento <b>◷</b></span>
+          </article>
+
+          <article class="app-card pending" data-category="Documentos" data-name="ordem serviço os pdf contrato timbre">
+            <div class="card-top"><span class="app-icon order">🛠️</span><span class="status publishing"><i></i>Em preparação</span></div>
+            <span class="category">Documentos</span><h3>Emissor de OS</h3><p>Leia a solicitação em PDF, informe o contrato e gere a Ordem de Serviço no timbre.</p>
+            <span class="action">Publicação em andamento <b>◷</b></span>
+          </article>
+
+          <article class="app-card pending" data-category="Documentos" data-name="licitações edital declarações propostas documentos">
+            <div class="card-top"><span class="app-icon gavel">⚖️</span><span class="status publishing"><i></i>Em preparação</span></div>
+            <span class="category">Documentos</span><h3>Licitações</h3><p>Leia o edital e prepare declarações, propostas e documentos licitatórios padronizados.</p>
+            <span class="action">Publicação em andamento <b>◷</b></span>
+          </article>
+
+          <article class="app-card pending" data-category="Educação" data-name="banco questões provas bncc avaliações educação">
+            <div class="card-top"><span class="app-icon book">📚</span><span class="status publishing"><i></i>Em preparação</span></div>
+            <span class="category">Educação</span><h3>Questões &amp; Provas</h3><p>Organize questões por BNCC, ano, bimestre e tipo e monte avaliações automaticamente.</p>
+            <span class="action">Publicação em andamento <b>◷</b></span>
+          </article>
+
+          <article class="app-card pending" data-category="Gestão" data-name="portal institucional atas fornecedores compliance documentos">
+            <div class="card-top"><span class="app-icon building">🏢</span><span class="status publishing"><i></i>Em preparação</span></div>
+            <span class="category">Gestão</span><h3>Portal Institucional</h3><p>Atas, documentos, fornecedores, compliance e avaliações em um único portal.</p>
+            <span class="action">Publicação em andamento <b>◷</b></span>
+          </article>
+
+          <article class="app-card pending" data-category="Gestão" data-name="dashboard cogerh ordens serviço valores indicadores">
+            <div class="card-top"><span class="app-icon chart">📊</span><span class="status internal"><i></i>Uso interno</span></div>
+            <span class="category">Gestão</span><h3>Dashboard COGERH</h3><p>Consolide Ordens de Serviço e acompanhe valores e indicadores operacionais.</p>
+            <span class="action">Acesso interno <b>🔒</b></span>
+          </article>
+        </div>
+
+        <div class="empty" id="emptyState" hidden>Nenhum aplicativo encontrado. Tente outro termo ou categoria.</div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="shell"><strong>K M O Gestão LTDA – EPP</strong><span>CNPJ 34.655.687/0001-15</span></div></footer>
+  <script src="/app.js"></script>
+</body>
+</html>
