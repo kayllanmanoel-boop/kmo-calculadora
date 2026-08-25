@@ -1,0 +1,1 @@
+Timbre oficial KMO dividido em quatro partes base64 para uso interno do gerador de PDF.
