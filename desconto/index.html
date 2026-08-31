@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>KMO | Calculadora de Desconto e Soma</title>
+  <style>
+    :root{--navy:#0b1f3a;--navy2:#12345b;--gold:#d6a63c;--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e8ef;--danger:#b42318;--success:#067647}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#eef3f9 0,#f8fafc 48%,#fff 100%);color:var(--text);min-height:100vh}
+    .top{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:22px 16px;box-shadow:0 6px 24px rgba(11,31,58,.18)}
+    .topin{max-width:980px;margin:auto;display:flex;align-items:center;gap:14px}.logo{width:58px;height:58px;object-fit:contain;background:#fff;border-radius:14px;padding:5px}.top h1{font-size:21px;margin:0}.top p{margin:4px 0 0;color:#dbe6f3;font-size:14px}
+    main{max-width:980px;margin:26px auto;padding:0 16px 36px}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 26px rgba(16,24,40,.06)}
+    h2{margin:0 0 5px;font-size:19px}.sub{margin:0 0 18px;color:var(--muted);font-size:14px}.field{margin:14px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.input{width:100%;height:50px;border:1px solid #cfd6e2;border-radius:12px;padding:0 14px;font-size:17px;outline:none;background:#fff;color:var(--text)}.input:focus{border-color:var(--navy2);box-shadow:0 0 0 3px rgba(18,52,91,.12)}
+    .quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 3px}.quick button,.ghost,.remove{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:10px;min-height:42px;padding:0 13px;font-weight:700;cursor:pointer}.quick button:hover,.ghost:hover,.remove:hover{background:#f3f6fa}.actions{display:flex;gap:10px;margin-top:15px}.primary{border:0;background:var(--navy);color:#fff;border-radius:11px;min-height:48px;padding:0 18px;font-size:15px;font-weight:800;cursor:pointer}.primary:hover{background:#102c50}.primary.gold{background:var(--gold);color:#1f2430}.primary.gold:hover{filter:brightness(.96)}
+    .extras{margin-top:18px}.addrow{display:grid;grid-template-columns:1fr auto;gap:10px}.list{display:grid;gap:8px;margin-top:12px}.item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:#fafbfd}.item span{font-weight:700}.remove{min-height:36px;color:var(--danger);padding:0 10px}
+    .result{background:linear-gradient(160deg,var(--navy) 0,#102b50 100%);color:#fff;border:none}.tag{color:#c9d7e8;font-size:12px;font-weight:800;letter-spacing:.08em}.total{font-size:42px;font-weight:900;letter-spacing:-.03em;margin:6px 0 18px;overflow-wrap:anywhere}.rows{border-top:1px solid rgba(255,255,255,.18);padding-top:10px}.r{display:flex;justify-content:space-between;gap:14px;padding:10px 0;font-size:14px;color:#dce6f2}.r strong{color:#fff;text-align:right}.grand{margin-top:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px}.grand small{color:#dce6f2}.grand b{display:block;margin-top:4px;font-size:20px}.msg{min-height:20px;margin:10px 0 0;font-size:13px;color:var(--muted)}.msg.error{color:var(--danger)}.msg.ok{color:var(--success)}
+    .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.topin{align-items:flex-start}.top h1{font-size:19px}.logo{width:50px;height:50px}.total{font-size:36px}.addrow{grid-template-columns:1fr}.primary.gold{width:100%}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="topin"><img class="logo" src="/apps/logo-kmo.png" alt="KMO"><div><h1>Calculadora de Desconto e Soma</h1><p>Informe o valor, aplique o desconto e some outros valores ao resultado.</p></div></div></header>
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>Valor principal</h2><p class="sub">O desconto será aplicado somente sobre este valor.</p>
+        <div class="field"><label for="principal">Valor (R$)</label><input id="principal" class="input" inputmode="decimal" placeholder="Ex.: 1.000,00"></div>
+        <div class="field"><label for="pct">Desconto (%)</label><input id="pct" class="input" type="number" min="0" max="100" step="0.01" placeholder="Ex.: 25"></div>
+        <div class="quick" aria-label="Descontos rápidos"><button type="button" data-pct="5">5%</button><button type="button" data-pct="10">10%</button><button type="button" data-pct="15">15%</button><button type="button" data-pct="20">20%</button><button type="button" data-pct="25">25%</button><button type="button" data-pct="30">30%</button></div>
+        <div class="extras">
+          <h2>Somar outros valores</h2><p class="sub">Adicione quantos valores precisar. Eles serão somados ao valor já descontado.</p>
+          <form id="addForm" class="addrow"><input id="extra" class="input" inputmode="decimal" placeholder="Ex.: 250,00"><button class="primary gold" type="submit">+ Adicionar</button></form>
+          <div id="lista" class="list"></div><p id="msg" class="msg" aria-live="polite"></p>
+        </div>
+      </section>
+      <aside class="card result">
+        <div class="tag">TOTAL FINAL</div><div id="total" class="total">R$ 0,00</div>
+        <div class="rows">
+          <div class="r"><span>Valor principal</span><strong id="rPrincipal">R$ 0,00</strong></div>
+          <div class="r"><span>Percentual</span><strong id="rPct">0%</strong></div>
+          <div class="r"><span>Valor do desconto</span><strong id="rDesconto">R$ 0,00</strong></div>
+          <div class="r"><span>Após desconto</span><strong id="rLiquido">R$ 0,00</strong></div>
+          <div class="r"><span>Outros valores</span><strong id="rExtras">R$ 0,00</strong></div>
+        </div>
+        <div class="grand"><small>Cálculo</small><b id="formula">R$ 0,00 + R$ 0,00</b></div>
+        <div class="actions"><button id="limpar" class="ghost" type="button">Limpar tudo</button></div>
+      </aside>
+    </div>
+    <div class="footer">KMO Gestão • Ferramenta de cálculo</div>
+  </main>
+  <script>
+    (()=>{
+      const q=s=>document.querySelector(s), principal=q('#principal'), pct=q('#pct'), extra=q('#extra'), lista=q('#lista'), msg=q('#msg');
+      const total=q('#total'), rPrincipal=q('#rPrincipal'), rPct=q('#rPct'), rDesconto=q('#rDesconto'), rLiquido=q('#rLiquido'), rExtras=q('#rExtras'), formula=q('#formula');
+      const extras=[]; const brl=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+      function money(v){return brl.format(Number.isFinite(v)?v:0)}
+      function parseMoney(t){let s=String(t||'').trim().replace(/\s/g,'').replace(/R\$/gi,''); if(!s)return NaN; if(s.includes(',')&&s.includes('.'))s=s.replace(/\./g,'').replace(',','.'); else if(s.includes(','))s=s.replace(',','.'); const n=Number(s); return Number.isFinite(n)?n:NaN}
+      function calc(){const pv=parseMoney(principal.value); const base=Number.isFinite(pv)&&pv>=0?pv:0; let p=Number(String(pct.value||0).replace(',','.')); if(!Number.isFinite(p))p=0; p=Math.max(0,Math.min(100,p)); const d=base*p/100, liquido=base-d, soma=extras.reduce((a,b)=>a+b,0), fim=liquido+soma; rPrincipal.textContent=money(base); rPct.textContent=p.toLocaleString('pt-BR',{maximumFractionDigits:2})+'%'; rDesconto.textContent=money(d); rLiquido.textContent=money(liquido); rExtras.textContent=money(soma); total.textContent=money(fim); formula.textContent=money(liquido)+' + '+money(soma)}
+      function render(){lista.innerHTML=''; if(!extras.length){const p=document.createElement('p');p.className='sub';p.style.margin='0';p.textContent='Nenhum valor adicional.';lista.appendChild(p);return} extras.forEach((v,i)=>{const row=document.createElement('div');row.className='item';const s=document.createElement('span');s.textContent=money(v);const b=document.createElement('button');b.type='button';b.className='remove';b.textContent='Remover';b.addEventListener('click',()=>{extras.splice(i,1);render();calc()});row.append(s,b);lista.appendChild(row)})}
+      principal.addEventListener('input',calc); pct.addEventListener('input',calc); document.querySelectorAll('[data-pct]').forEach(b=>b.addEventListener('click',()=>{pct.value=b.dataset.pct;calc()}));
+      q('#addForm').addEventListener('submit',e=>{e.preventDefault();const v=parseMoney(extra.value);msg.className='msg';if(!Number.isFinite(v)){msg.textContent='Digite um valor válido para adicionar.';msg.classList.add('error');extra.focus();return}extras.push(v);extra.value='';msg.textContent='Valor adicionado.';msg.classList.add('ok');render();calc();extra.focus()});
+      q('#limpar').addEventListener('click',()=>{principal.value='';pct.value='';extra.value='';extras.length=0;msg.textContent='';render();calc();principal.focus()}); render();calc();
+    })();
+  </script>
+</body>
+</html>
