@@ -13,5 +13,6 @@ COPY sw.js /usr/share/caddy/apps/calculadora/sw.js
 COPY logo-kmo.png /usr/share/caddy/apps/logo-kmo.png
 COPY recibos /usr/share/caddy/apps/recibos
 COPY kmo-driver /usr/share/caddy/apps/motorista
+COPY desconto /usr/share/caddy/apps/desconto
 
 EXPOSE 80
