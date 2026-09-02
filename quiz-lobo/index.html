@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#06132f">
+  <meta name="description" content="Quiz do Lobo KMO — desafio educativo sobre licitações e contratos públicos, com evolução de armadura.">
+  <title>Quiz do Lobo | KMO Gestão</title>
+  <link rel="icon" href="/apps/logo-kmo.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell bar">
+      <a class="brand" href="/" aria-label="Voltar à Central KMO">
+        <img src="/apps/logo-kmo.png" alt="KMO Gestão">
+        <span><strong>KMO GESTÃO</strong><small>Quiz do Lobo</small></span>
+      </a>
+      <a class="back" href="/">← Central de Aplicativos</a>
+    </div>
+  </header>
+
+  <main class="arena">
+    <div class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">TREINAMENTO KMO • LEI Nº 14.133/2021</span>
+          <h1>Desafio dos <em>Contratos Públicos</em></h1>
+          <p>São 30 perguntas. A cada acerto, o Lobo KMO conquista experiência e evolui sua armadura até chegar ao nível máximo.</p>
+          <div class="hero-tags"><span>30 desafios</span><span>6 níveis de armadura</span><span>pontuação em tempo real</span></div>
+        </div>
+        <div class="logo-orbit" aria-hidden="true"><div class="orbit"></div><img src="/apps/logo-kmo.png" alt=""></div>
+      </section>
+
+      <section class="game" id="game">
+        <aside class="wolf-panel">
+          <div class="rank">NÍVEL <strong id="armorLevel">0</strong>/6</div>
+          <div class="wolf-stage" id="wolfStage">
+            <div class="halo"></div>
+            <div class="shield-mark">KMO</div>
+            <div class="wolf" id="wolf">🐺</div>
+            <div class="armor-badge" id="armorBadge">Lobo Recruta</div>
+          </div>
+          <div class="armor-progress"><div id="armorBar"></div></div>
+          <p id="armorText">A jornada começa agora. Acerte questões para equipar o Lobo.</p>
+          <div class="mini-stats">
+            <div><strong id="score">0</strong><span>acertos</span></div>
+            <div><strong id="streak">0</strong><span>sequência</span></div>
+            <div><strong id="best">0</strong><span>melhor sequência</span></div>
+          </div>
+        </aside>
+
+        <section class="quiz-card" aria-live="polite">
+          <div class="quiz-head">
+            <div><span class="question-label">PERGUNTA</span><strong><span id="questionNumber">1</span>/30</strong></div>
+            <div class="score-chip">XP <strong id="xp">0</strong></div>
+          </div>
+          <div class="main-progress"><div id="mainBar"></div></div>
+          <div class="topic" id="topic">Princípios</div>
+          <h2 id="question">Carregando desafio...</h2>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback" hidden></div>
+          <div class="actions">
+            <button class="secondary" id="restartBtn" type="button">Reiniciar</button>
+            <button class="primary" id="nextBtn" type="button" disabled>Próxima pergunta →</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="result" id="result" hidden>
+        <img src="/apps/logo-kmo.png" alt="KMO Gestão">
+        <span class="eyebrow">MISSÃO CONCLUÍDA</span>
+        <h2 id="resultTitle">Treinamento concluído</h2>
+        <p id="resultText"></p>
+        <div class="result-score"><strong id="finalScore">0/30</strong><span>pontuação final</span></div>
+        <button class="primary" id="playAgain" type="button">Jogar novamente</button>
+      </section>
+
+      <section class="legal-note">
+        <strong>Conteúdo educativo KMO</strong>
+        <p>Quiz de treinamento baseado em conceitos gerais da Lei nº 14.133/2021. Para decisões administrativas ou jurídicas, consulte sempre a legislação e os atos oficiais vigentes.</p>
+      </section>
+    </div>
+  </main>
+  <footer><div class="shell"><strong>K M O Gestão LTDA – EPP</strong><span>Quiz do Lobo • Sistema público KMO</span></div></footer>
+  <script src="./app.js"></script>
+</body>
+</html>
