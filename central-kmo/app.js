@@ -5,6 +5,12 @@ const filters=document.querySelector('#filters');
 filters.querySelector('button[data-category="Gestão"]')?.insertAdjacentHTML('beforebegin','<button data-category="Alimentação">Alimentação</button>');
 
 grid.insertAdjacentHTML('afterbegin',`
+  <a class="app-card featured" data-category="Educação" data-name="quiz lobo contratos publicos licitacoes lei 14133 treinamento jogo" href="/apps/quiz-lobo/">
+    <div class="card-top"><span class="app-icon" style="background:#edf0ff">🐺</span><span class="status available"><i></i>Disponível</span></div>
+    <span class="category">Educação</span><h3>Quiz do Lobo KMO</h3><p>30 desafios sobre licitações e contratos públicos, com pontuação, níveis e evolução de armadura.</p>
+    <span class="action">Iniciar desafio <b>→</b></span>
+  </a>
+
   <a class="app-card featured" data-category="Gestão" data-name="calculadora desconto percentual soma valores financeiro" href="/apps/desconto/">
     <div class="card-top"><span class="app-icon" style="background:#fff4d9">🧮</span><span class="status available"><i></i>Disponível</span></div>
     <span class="category">Gestão</span><h3>Calculadora de Desconto</h3><p>Aplique percentuais de desconto, confira o valor abatido e some outros valores ao resultado final.</p>
