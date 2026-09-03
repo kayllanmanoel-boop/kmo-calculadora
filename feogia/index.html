@@ -24,9 +24,7 @@
     </div>
   </div>
 </section>
-
 <section id="sceneShowcase" class="scene-hero" aria-label="Cenários da aventura"><img id="sceneImage" src="scenes/amazonia.jpg" alt="Cenário da Floresta Amazônica e rios com a mascote Feogia"><div class="scene-overlay"><div class="scene-caption"><strong id="sceneTitle">🌿 Floresta Amazônica e Rios</strong><span id="sceneText">Cenário da expedição: hidrografia, biodiversidade, paisagem e relações sociedade-natureza.</span></div></div></section><div id="sceneThumbs" class="scene-thumbs" aria-label="Escolha de cenário"></div>
-
 <section id="seriesScreen" class="panel">
   <h2>1. Escolha sua série</h2><p class="panel-sub">As perguntas mudam de profundidade conforme o ano escolar e são selecionadas de um banco ampliado e alinhado à BNCC.</p><div class="bank-counter"><span class="bank-pill">📚 120 questões no banco</span><span class="bank-pill">🎲 10 sorteadas por partida</span><span class="bank-pill">🎯 BNCC por habilidade</span></div><div class="scenario-strip"><div class="scenario-tile"><img src="scenes/amazonia.jpg" alt="Amazônia e rios"><span>Amazônia e Rios</span></div><div class="scenario-tile"><img src="scenes/pantanal.jpg" alt="Pantanal"><span>Pantanal</span></div><div class="scenario-tile"><img src="scenes/serra_gaucha.jpg" alt="Serra Gaúcha"><span>Serra Gaúcha</span></div><div class="scenario-tile"><img src="scenes/caatinga.jpg" alt="Caatinga"><span>Caatinga</span></div></div>
   <div class="choices">
@@ -34,7 +32,6 @@
     <button class="choice-card" data-grade="7" type="button"><span class="tag">Interpretação</span><div class="emoji">🌐</div><h3>7º ANO</h3><p>Questões com mais relações entre localização, sociedade, clima, relevo, população, território e paisagens.</p></button>
   </div>
 </section>
-
 <section id="levelScreen" class="panel hidden">
   <h2>2. Escolha o nível</h2><p id="levelSubtitle" class="panel-sub"></p>
   <div class="choices" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
@@ -44,7 +41,6 @@
   </div>
   <div class="top-actions"><button id="backSeries" class="btn btn-secondary" type="button">← Trocar série</button></div>
 </section>
-
 <section id="gameScreen" class="hidden">
   <div id="route" class="route panel" style="padding:12px;margin-bottom:0"></div>
   <div class="game-grid panel" style="background:transparent;border:none;box-shadow:none;padding:0;margin-top:10px">
@@ -58,12 +54,23 @@
     <aside class="side"><h3 style="margin-top:0">🎒 Diário da missão</h3><div style="display:flex;justify-content:space-between;font-size:.85rem"><span>Progresso</span><strong id="progressText">0/10</strong></div><div class="progress-track" style="margin-top:7px"><div id="progress" class="progress"></div></div><div class="stat-grid"><div class="stat"><strong id="hits">0</strong><span>acertos</span></div><div class="stat"><strong id="phaseNum">1</strong><span>fase</span></div></div><p style="color:var(--muted);font-size:.88rem;line-height:1.45">A dica não reduz a pontuação. Feogia explica a resposta depois de cada escolha.</p><button id="leaveGame" class="btn btn-secondary" style="width:100%" type="button">↩ Trocar série/nível</button></aside>
   </div>
 </section>
-
 <section id="resultScreen" class="panel result hidden"><div class="cup">🏆</div><h2>Missão concluída!</h2><p id="finalScore" class="panel-sub" style="font-size:1.1rem"></p><div id="rank" class="rank"></div><p id="finalTalk" style="max-width:700px;margin:14px auto;color:var(--muted);line-height:1.55"></p><div class="result-visual"><img src="scenes/feedback.jpg" alt="Cenário de resultado da rodada com Feogia"></div><div id="breakdown" class="result-breakdown"></div><div class="top-actions" style="justify-content:center"><button id="replay" class="btn btn-primary" type="button">🔄 Jogar este nível novamente</button><button id="changeLevel" class="btn btn-secondary" type="button">🗺️ Escolher outro nível</button></div></section>
 <footer class="footer">A Volta ao Mundo com Feogia • 6º e 7º ano • Banco ampliado • Habilidades BNCC</footer>
 </main>
 <script src="data-base.js"></script>
+<script src="banks/base-6-1.js"></script>
+<script src="banks/base-6-2.js"></script>
+<script src="banks/base-6-3.js"></script>
+<script src="banks/base-7-1.js"></script>
+<script src="banks/base-7-2.js"></script>
+<script src="banks/base-7-3.js"></script>
 <script src="data-extra.js"></script>
+<script src="banks/extra-6-1.js"></script>
+<script src="banks/extra-6-2.js"></script>
+<script src="banks/extra-6-3.js"></script>
+<script src="banks/extra-7-1.js"></script>
+<script src="banks/extra-7-2.js"></script>
+<script src="banks/extra-7-3.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
