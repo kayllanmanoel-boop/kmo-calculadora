@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1f3a">
+<title>KMO | Caderneta de Prestação de Contas</title>
+<style>
+:root{--navy:#0b1f3a;--navy2:#12345b;--gold:#d6a63c;--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#dfe5ee;--green:#067647;--red:#b42318;--blue:#175cd3;--amber:#b54708}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f5f7fb;color:var(--text)}button,input,select,textarea{font:inherit}.top{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:18px 16px;position:sticky;top:0;z-index:10;box-shadow:0 4px 18px rgba(11,31,58,.18)}.topin{max-width:1280px;margin:auto;display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;background:#fff;border-radius:12px;padding:5px;object-fit:contain}.top h1{font-size:20px;margin:0}.top p{font-size:12px;margin:3px 0 0;color:#d9e5f2}.wrap{max-width:1280px;margin:18px auto;padding:0 14px 40px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.btn{border:0;border-radius:10px;min-height:42px;padding:0 14px;font-weight:800;cursor:pointer}.btn.primary{background:var(--navy);color:#fff}.btn.gold{background:var(--gold);color:#1e2430}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--navy)}.btn.danger{background:#fff1f0;color:var(--red);border:1px solid #fecdca}.layout{display:grid;grid-template-columns:1fr;gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(16,24,40,.04)}.card h2{font-size:17px;margin:0 0 4px}.sub{font-size:12px;color:var(--muted);margin:0 0 14px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:5px;color:#344054}.inp{width:100%;min-height:43px;border:1px solid #cfd7e4;border-radius:10px;padding:9px 11px;background:#fff;color:var(--text);outline:none}.inp:focus{border-color:var(--navy2);box-shadow:0 0 0 3px rgba(18,52,91,.10)}textarea.inp{min-height:80px;resize:vertical}.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px}.stat span{display:block;font-size:11px;color:var(--muted);font-weight:700}.stat b{display:block;font-size:20px;margin-top:4px;overflow-wrap:anywhere}.stat.in b{color:var(--green)}.stat.out b{color:var(--red)}.stat.balance b{color:var(--navy)}.stat.ded b{color:var(--amber)}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.tab{border:1px solid var(--line);background:#fff;color:#344054;border-radius:999px;min-height:38px;padding:0 13px;font-weight:800;cursor:pointer}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}.panel{display:none}.panel.active{display:block}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:920px}.tbl th,.tbl td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;vertical-align:top}.tbl th{background:#f8fafc;color:#475467;font-size:11px;text-transform:uppercase;letter-spacing:.02em}.money{text-align:right!important;white-space:nowrap}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}.pill.in{background:#ecfdf3;color:#027a48}.pill.out{background:#fff1f0;color:#b42318}.pill.manual{background:#eff8ff;color:#175cd3}.pill.nf{background:#fffaeb;color:#b54708}.rowactions{display:flex;gap:5px}.mini{border:1px solid var(--line);background:#fff;border-radius:8px;min-height:32px;padding:0 8px;cursor:pointer;font-weight:700;font-size:11px}.empty{padding:22px;text-align:center;color:var(--muted);font-size:13px}.importbox{border:1px dashed #98a2b3;border-radius:12px;padding:14px;background:#fcfcfd}.preview{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}.note{font-size:11px;color:var(--muted);line-height:1.45}.reportHead{display:none}.audit{display:grid;gap:8px}.audititem{border-left:3px solid var(--line);padding:8px 10px;background:#fafbfc;border-radius:0 10px 10px 0;font-size:12px}.audititem b{display:block;margin-bottom:2px}.muted{color:var(--muted)}.right{text-align:right}.sep{height:1px;background:var(--line);margin:14px 0}.dangerText{color:var(--red)}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid4,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.top{position:static}.grid2,.grid3,.grid4,.stats{grid-template-columns:1fr}.btn{width:100%}.toolbar .btn{width:auto}.top h1{font-size:17px}.logo{width:46px;height:46px}}
+@media print{body{background:#fff}.top,.toolbar,.tabs,.noPrint,.rowactions{display:none!important}.wrap{max-width:none;margin:0;padding:0}.card{box-shadow:none;border:0;padding:0;margin:0}.reportHead{display:block;border-bottom:2px solid #0b1f3a;padding-bottom:12px;margin-bottom:14px}.reportHead h1{margin:0;font-size:20px}.reportHead p{margin:4px 0;font-size:11px}.stats{grid-template-columns:repeat(5,1fr);gap:5px;margin:10px 0}.stat{box-shadow:none;padding:8px}.stat b{font-size:14px}.panel{display:block!important;margin-top:16px}.panel h2{font-size:14px}.tablewrap{overflow:visible;border:1px solid #bbb}.tbl{min-width:0;font-size:9px}.tbl th,.tbl td{font-size:9px;padding:5px}.hidePrint{display:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><img class="logo" src="../logo-kmo.png" alt="KMO"><div><h1>Caderneta de Prestação de Contas</h1><p>Entradas, saídas, notas fiscais, retenções, saldo e rastreabilidade do dinheiro.</p></div></div></header>
+<main class="wrap">
+  <div class="toolbar noPrint">
+    <button class="btn primary" id="btnNovaEntrada">+ Entrada</button>
+    <button class="btn danger" id="btnNovaSaida">+ Saída</button>
+    <button class="btn gold" id="btnImportarNF">Importar Nota Fiscal</button>
+    <button class="btn ghost" id="btnRelatorio">Emitir relatório / PDF</button>
+    <button class="btn ghost" id="btnCsv">Exportar CSV</button>
+    <button class="btn ghost" id="btnBackup">Backup JSON</button>
+    <label class="btn ghost" style="display:inline-flex;align-items:center;cursor:pointer">Restaurar backup<input id="restoreFile" type="file" accept="application/json" hidden></label>
+  </div>
+
+  <section class="card">
+    <h2>Identificação da prestação de contas</h2><p class="sub">Cadastre o cliente, contrato/projeto e período. Essas informações sairão no relatório.</p>
+    <div class="grid4">
+      <div class="field"><label>Cliente / Órgão</label><input id="cliente" class="inp" placeholder="Ex.: CREDE 05 - Tianguá"></div>
+      <div class="field"><label>Contrato / Projeto</label><input id="contrato" class="inp" placeholder="Ex.: Contrato 022/2026"></div>
+      <div class="field"><label>Período inicial</label><input id="periodoIni" class="inp" type="date"></div>
+      <div class="field"><label>Período final</label><input id="periodoFim" class="inp" type="date"></div>
+      <div class="field"><label>Responsável</label><input id="responsavel" class="inp" placeholder="Responsável pela prestação"></div>
+      <div class="field"><label>Centro de custo</label><input id="centroCusto" class="inp" placeholder="Evento, contrato, secretaria..."></div>
+      <div class="field"><label>Saldo inicial (R$)</label><input id="saldoInicial" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Observação geral</label><input id="obsGeral" class="inp" placeholder="Opcional"></div>
+    </div>
+  </section>
+
+  <section class="stats" style="margin-top:14px">
+    <div class="stat"><span>SALDO INICIAL</span><b id="sInicial">R$ 0,00</b></div>
+    <div class="stat in"><span>ENTRADAS LÍQUIDAS</span><b id="sEntradas">R$ 0,00</b></div>
+    <div class="stat ded"><span>DESCONTOS / RETENÇÕES</span><b id="sDeducoes">R$ 0,00</b></div>
+    <div class="stat out"><span>SAÍDAS</span><b id="sSaidas">R$ 0,00</b></div>
+    <div class="stat balance"><span>SALDO ATUAL</span><b id="sSaldo">R$ 0,00</b></div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <div class="reportHead"><h1>Relatório de Prestação de Contas</h1><p id="rh1"></p><p id="rh2"></p><p id="rh3"></p></div>
+    <div class="tabs noPrint">
+      <button class="tab active" data-tab="mov">Movimentações</button>
+      <button class="tab" data-tab="nf">Notas fiscais</button>
+      <button class="tab" data-tab="audit">Rastreabilidade</button>
+      <button class="tab" data-tab="cad">Cadastros rápidos</button>
+    </div>
+
+    <div class="panel active" id="panel-mov">
+      <h2>Movimentações financeiras</h2><p class="sub">Mostra de onde o dinheiro entrou e para onde saiu.</p>
+      <div class="tablewrap"><table class="tbl"><thead><tr><th>Data</th><th>Tipo</th><th>Cliente / Favorecido</th><th>Descrição</th><th>Documento</th><th>Pagamento</th><th>Categoria</th><th class="money">Bruto</th><th class="money">Retenções</th><th class="money">Líquido</th><th class="hidePrint">Ações</th></tr></thead><tbody id="tbodyMov"></tbody></table></div>
+    </div>
+
+    <div class="panel" id="panel-nf">
+      <h2>Notas fiscais e descontos</h2><p class="sub">Controle de valor bruto, retenções/descontos e valor efetivamente recebido/pago.</p>
+      <div class="tablewrap"><table class="tbl"><thead><tr><th>Data</th><th>NF</th><th>Operação</th><th>Emitente / Cliente</th><th class="money">Bruto</th><th class="money">ISS</th><th class="money">INSS</th><th class="money">IR</th><th class="money">PIS</th><th class="money">COFINS</th><th class="money">CSLL</th><th class="money">Outros</th><th class="money">Líquido</th></tr></thead><tbody id="tbodyNF"></tbody></table></div>
+    </div>
+
+    <div class="panel" id="panel-audit">
+      <h2>Rastreabilidade do dinheiro</h2><p class="sub">Linha do tempo para facilitar a conferência da prestação de contas.</p><div class="audit" id="auditList"></div>
+    </div>
+
+    <div class="panel" id="panel-cad">
+      <h2>Cadastros rápidos</h2><p class="sub">As opções já vêm prontas e você pode usar o campo “Outros” nas movimentações quando necessário.</p>
+      <div class="grid2"><div><b>Formas de pagamento</b><p class="note">PIX • TED/Transferência • Boleto • Cartão • Dinheiro • Débito em conta • Cheque • Outros</p></div><div><b>Categorias de saída</b><p class="note">Fornecedor • Alimentação • Locação • Transporte • Pessoal • Impostos • Material • Combustível • Hospedagem • Taxas bancárias • Reembolso • Outros</p></div></div>
+    </div>
+  </section>
+
+  <section class="card noPrint" id="formBox" style="margin-top:14px;display:none">
+    <h2 id="formTitle">Nova movimentação</h2><p class="sub" id="formSub"></p>
+    <div class="grid4">
+      <div class="field"><label>Tipo</label><select id="mTipo" class="inp"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div>
+      <div class="field"><label>Data</label><input id="mData" class="inp" type="date"></div>
+      <div class="field"><label>Cliente / Favorecido</label><input id="mPessoa" class="inp" placeholder="Nome"></div>
+      <div class="field"><label>Documento / NF</label><input id="mDoc" class="inp" placeholder="NF 123, recibo, comprovante..."></div>
+      <div class="field"><label>Descrição</label><input id="mDesc" class="inp" placeholder="Objeto do pagamento/recebimento"></div>
+      <div class="field"><label>Forma de pagamento</label><select id="mPgto" class="inp"><option>PIX</option><option>TED/Transferência</option><option>Boleto</option><option>Cartão</option><option>Dinheiro</option><option>Débito em conta</option><option>Cheque</option><option>Outros</option></select></div>
+      <div class="field"><label>Categoria</label><select id="mCat" class="inp"><option>Recebimento de cliente</option><option>Fornecedor</option><option>Alimentação</option><option>Locação</option><option>Transporte</option><option>Pessoal</option><option>Impostos</option><option>Material</option><option>Combustível</option><option>Hospedagem</option><option>Taxas bancárias</option><option>Reembolso</option><option>Outros</option></select></div>
+      <div class="field"><label>Valor bruto (R$)</label><input id="mBruto" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>ISS retido (R$)</label><input id="mISS" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>INSS retido (R$)</label><input id="mINSS" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>IR / IRRF (R$)</label><input id="mIR" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>PIS (R$)</label><input id="mPIS" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>COFINS (R$)</label><input id="mCOFINS" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>CSLL (R$)</label><input id="mCSLL" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Outros descontos (R$)</label><input id="mOutros" class="inp" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Valor líquido</label><input id="mLiquido" class="inp" readonly></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Observações</label><textarea id="mObs" class="inp" placeholder="Informações adicionais, destino do recurso, justificativa..."></textarea></div>
+    <div class="toolbar" style="margin:12px 0 0"><button class="btn primary" id="salvarMov">Salvar movimentação</button><button class="btn ghost" id="cancelarMov">Cancelar</button></div>
+  </section>
+
+  <section class="card noPrint" id="importBox" style="margin-top:14px;display:none">
+    <h2>Importar Nota Fiscal</h2><p class="sub">Aceita XML de NF-e/NFS-e e PDF com texto pesquisável. Revise os dados antes de salvar.</p>
+    <div class="importbox">
+      <div class="grid3">
+        <div class="field"><label>Operação da nota</label><select id="nfOperacao" class="inp"><option value="entrada">NF emitida / dinheiro a receber</option><option value="saida">NF recebida / pagamento a fornecedor</option></select></div>
+        <div class="field"><label>Arquivo</label><input id="nfFile" class="inp" type="file" accept=".xml,.pdf,text/xml,application/xml,application/pdf"></div>
+        <div class="field"><label>Forma de pagamento</label><select id="nfPgto" class="inp"><option>PIX</option><option>TED/Transferência</option><option>Boleto</option><option>Cartão</option><option>Dinheiro</option><option>Débito em conta</option><option>Outros</option></select></div>
+      </div>
+      <p class="note" id="nfStatus">Escolha o arquivo. O sistema tentará localizar número da nota, data, cliente/emitente, valor e retenções.</p>
+    </div>
+    <div class="preview" id="nfPreview" style="display:none">
+      <div class="grid4">
+        <div class="field"><label>Número da NF</label><input id="nfNumero" class="inp"></div>
+        <div class="field"><label>Data</label><input id="nfData" class="inp" type="date"></div>
+        <div class="field"><label>Emitente</label><input id="nfEmitente" class="inp"></div>
+        <div class="field"><label>Cliente / Destinatário</label><input id="nfDest" class="inp"></div>
+        <div class="field"><label>Valor bruto</label><input id="nfBruto" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>ISS</label><input id="nfISS" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>INSS</label><input id="nfINSS" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>IR / IRRF</label><input id="nfIR" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>PIS</label><input id="nfPIS" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>COFINS</label><input id="nfCOFINS" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>CSLL</label><input id="nfCSLL" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>Outros descontos</label><input id="nfOutros" class="inp" inputmode="decimal"></div>
+        <div class="field"><label>Valor líquido calculado</label><input id="nfLiquido" class="inp" readonly></div>
+        <div class="field" style="grid-column:span 3"><label>Descrição</label><input id="nfDesc" class="inp" placeholder="Serviços / fornecimento da nota"></div>
+      </div>
+      <div class="toolbar" style="margin:12px 0 0"><button class="btn primary" id="salvarNF">Confirmar e lançar nota</button><button class="btn ghost" id="cancelarNF">Cancelar</button></div>
+    </div>
+  </section>
+</main>
+<script type="module">
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const brl=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+const KEY='kmo_prestacao_contas_v1';
+const state=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{meta:{},mov:[]}}catch{return{meta:{},mov:[]}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function parseMoney(v){let s=String(v??'').trim().replace(/R\$/gi,'').replace(/\s/g,'');if(!s)return 0;if(s.includes(',')&&s.includes('.'))s=s.replace(/\./g,'').replace(',','.');else if(s.includes(','))s=s.replace(',','.');const n=Number(s);return Number.isFinite(n)?n:0}
+function fmt(v){return brl.format(Number(v)||0)}
+function isoToday(){return new Date().toISOString().slice(0,10)}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function deductions(x){return ['iss','inss','ir','pis','cofins','csll','outros'].reduce((a,k)=>a+(Number(x[k])||0),0)}
+function liquid(x){return Math.max(0,(Number(x.bruto)||0)-deductions(x))}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dateBR(s){if(!s)return'';const [y,m,d]=s.split('-');return d&&m&&y?`${d}/${m}/${y}`:s}
+function fillMeta(){const m=state.meta||{};['cliente','contrato','periodoIni','periodoFim','responsavel','centroCusto','saldoInicial','obsGeral'].forEach(k=>{$('#'+k).value=m[k]||''})}
+function saveMeta(){state.meta={cliente:$('#cliente').value,contrato:$('#contrato').value,periodoIni:$('#periodoIni').value,periodoFim:$('#periodoFim').value,responsavel:$('#responsavel').value,centroCusto:$('#centroCusto').value,saldoInicial:$('#saldoInicial').value,obsGeral:$('#obsGeral').value};save();render()}
+$$('#cliente,#contrato,#periodoIni,#periodoFim,#responsavel,#centroCusto,#saldoInicial,#obsGeral').forEach(el=>el.addEventListener('input',saveMeta));
+function render(){
+ const saldoIni=parseMoney(state.meta?.saldoInicial);let entradas=0,saidas=0,ded=0;
+ state.mov.forEach(x=>{const liq=liquid(x);if(x.tipo==='entrada'){entradas+=liq;ded+=deductions(x)}else saidas+=liq});
+ $('#sInicial').textContent=fmt(saldoIni);$('#sEntradas').textContent=fmt(entradas);$('#sDeducoes').textContent=fmt(ded);$('#sSaidas').textContent=fmt(saidas);$('#sSaldo').textContent=fmt(saldoIni+entradas-saidas);
+ $('#rh1').textContent=`Cliente/Órgão: ${state.meta?.cliente||'—'} | Contrato/Projeto: ${state.meta?.contrato||'—'}`;
+ $('#rh2').textContent=`Período: ${dateBR(state.meta?.periodoIni)||'—'} a ${dateBR(state.meta?.periodoFim)||'—'} | Centro de custo: ${state.meta?.centroCusto||'—'}`;
+ $('#rh3').textContent=`Responsável: ${state.meta?.responsavel||'—'} | Observação: ${state.meta?.obsGeral||'—'}`;
+ const mov=[...state.mov].sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+ $('#tbodyMov').innerHTML=mov.length?mov.map(x=>`<tr><td>${dateBR(x.data)}</td><td><span class="pill ${x.tipo==='entrada'?'in':'out'}">${x.tipo==='entrada'?'ENTRADA':'SAÍDA'}</span></td><td>${esc(x.pessoa)}</td><td>${esc(x.desc)}</td><td>${esc(x.doc)}</td><td>${esc(x.pgto)}</td><td>${esc(x.cat)}</td><td class="money">${fmt(x.bruto)}</td><td class="money">${fmt(deductions(x))}</td><td class="money"><b>${fmt(liquid(x))}</b></td><td class="hidePrint"><div class="rowactions"><button class="mini" data-edit="${x.id}">Editar</button><button class="mini dangerText" data-del="${x.id}">Excluir</button></div></td></tr>`).join(''):`<tr><td colspan="11" class="empty">Nenhuma movimentação cadastrada.</td></tr>`;
+ const nfs=mov.filter(x=>x.origem==='nf');
+ $('#tbodyNF').innerHTML=nfs.length?nfs.map(x=>`<tr><td>${dateBR(x.data)}</td><td>${esc(x.doc)}</td><td>${x.tipo==='entrada'?'Entrada':'Saída'}</td><td>${esc(x.pessoa)}</td><td class="money">${fmt(x.bruto)}</td><td class="money">${fmt(x.iss)}</td><td class="money">${fmt(x.inss)}</td><td class="money">${fmt(x.ir)}</td><td class="money">${fmt(x.pis)}</td><td class="money">${fmt(x.cofins)}</td><td class="money">${fmt(x.csll)}</td><td class="money">${fmt(x.outros)}</td><td class="money"><b>${fmt(liquid(x))}</b></td></tr>`).join(''):`<tr><td colspan="13" class="empty">Nenhuma nota fiscal importada.</td></tr>`;
+ $('#auditList').innerHTML=mov.length?mov.map(x=>`<div class="audititem"><b>${dateBR(x.data)} • ${x.tipo==='entrada'?'Entrada':'Saída'} de ${fmt(liquid(x))}</b><div>${x.tipo==='entrada'?'Origem':'Destino'}: ${esc(x.pessoa||'Não informado')} • ${esc(x.desc||'Sem descrição')}</div><div class="muted">Documento: ${esc(x.doc||'—')} • Pagamento: ${esc(x.pgto||'—')} • Categoria: ${esc(x.cat||'—')}${deductions(x)?` • Retenções/descontos: ${fmt(deductions(x))}`:''}</div></div>`).join(''):`<div class="empty">A rastreabilidade aparecerá conforme as entradas e saídas forem lançadas.</div>`;
+ $$('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Excluir esta movimentação?')){state.mov=state.mov.filter(x=>x.id!==b.dataset.del);save();render()}});
+ $$('[data-edit]').forEach(b=>b.onclick=()=>editMov(b.dataset.edit));
+}
+$$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));$$('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#panel-'+b.dataset.tab).classList.add('active')}));
+let editingId=null;
+function openMov(tipo,id=null){editingId=id;const x=id?state.mov.find(m=>m.id===id):null;$('#formBox').style.display='block';$('#importBox').style.display='none';$('#formTitle').textContent=id?'Editar movimentação':tipo==='entrada'?'Nova entrada':'Nova saída';$('#formSub').textContent=tipo==='entrada'?'Registre o dinheiro recebido, inclusive valores vindos de notas fiscais.':'Registre para quem o dinheiro foi pago e qual foi a finalidade.';$('#mTipo').value=x?.tipo||tipo;$('#mData').value=x?.data||isoToday();$('#mPessoa').value=x?.pessoa||'';$('#mDoc').value=x?.doc||'';$('#mDesc').value=x?.desc||'';$('#mPgto').value=x?.pgto||'PIX';$('#mCat').value=x?.cat||(tipo==='entrada'?'Recebimento de cliente':'Fornecedor');$('#mBruto').value=x?numBR(x.bruto):'';$('#mISS').value=x?numBR(x.iss):'';$('#mINSS').value=x?numBR(x.inss):'';$('#mIR').value=x?numBR(x.ir):'';$('#mPIS').value=x?numBR(x.pis):'';$('#mCOFINS').value=x?numBR(x.cofins):'';$('#mCSLL').value=x?numBR(x.csll):'';$('#mOutros').value=x?numBR(x.outros):'';$('#mObs').value=x?.obs||'';calcMov();$('#formBox').scrollIntoView({behavior:'smooth',block:'start'})}
+function editMov(id){const x=state.mov.find(m=>m.id===id);if(x)openMov(x.tipo,id)}
+function numBR(v){return (Number(v)||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function calcMov(){const x={bruto:parseMoney($('#mBruto').value),iss:parseMoney($('#mISS').value),inss:parseMoney($('#mINSS').value),ir:parseMoney($('#mIR').value),pis:parseMoney($('#mPIS').value),cofins:parseMoney($('#mCOFINS').value),csll:parseMoney($('#mCSLL').value),outros:parseMoney($('#mOutros').value)};$('#mLiquido').value=numBR(liquid(x))}
+$$('#mBruto,#mISS,#mINSS,#mIR,#mPIS,#mCOFINS,#mCSLL,#mOutros').forEach(x=>x.addEventListener('input',calcMov));
+$('#btnNovaEntrada').onclick=()=>openMov('entrada');$('#btnNovaSaida').onclick=()=>openMov('saida');$('#cancelarMov').onclick=()=>{$('#formBox').style.display='none';editingId=null};
+$('#salvarMov').onclick=()=>{const bruto=parseMoney($('#mBruto').value);if(bruto<=0){alert('Informe um valor bruto maior que zero.');return}const x={id:editingId||uid(),origem:editingId?(state.mov.find(m=>m.id===editingId)?.origem||'manual'):'manual',tipo:$('#mTipo').value,data:$('#mData').value,pessoa:$('#mPessoa').value.trim(),doc:$('#mDoc').value.trim(),desc:$('#mDesc').value.trim(),pgto:$('#mPgto').value,cat:$('#mCat').value,bruto,iss:parseMoney($('#mISS').value),inss:parseMoney($('#mINSS').value),ir:parseMoney($('#mIR').value),pis:parseMoney($('#mPIS').value),cofins:parseMoney($('#mCOFINS').value),csll:parseMoney($('#mCSLL').value),outros:parseMoney($('#mOutros').value),obs:$('#mObs').value.trim()};if(editingId){state.mov=state.mov.map(m=>m.id===editingId?x:m)}else state.mov.push(x);save();render();$('#formBox').style.display='none';editingId=null};
+
+$('#btnImportarNF').onclick=()=>{$('#importBox').style.display='block';$('#formBox').style.display='none';$('#nfPreview').style.display='none';$('#nfFile').value='';$('#nfStatus').textContent='Escolha o arquivo. O sistema tentará localizar número da nota, data, cliente/emitente, valor e retenções.';$('#importBox').scrollIntoView({behavior:'smooth',block:'start'})};$('#cancelarNF').onclick=()=>{$('#importBox').style.display='none'};
+function tagAny(doc,names){for(const n of names){const all=[...doc.getElementsByTagName('*')];const el=all.find(e=>e.localName?.toLowerCase()===n.toLowerCase());if(el?.textContent?.trim())return el.textContent.trim()}return''}
+function moneyTag(doc,names){return parseMoney(tagAny(doc,names))}
+function setNF(d){$('#nfNumero').value=d.numero||'';$('#nfData').value=(d.data||'').slice(0,10);$('#nfEmitente').value=d.emitente||'';$('#nfDest').value=d.dest||'';$('#nfBruto').value=numBR(d.bruto||0);$('#nfISS').value=numBR(d.iss||0);$('#nfINSS').value=numBR(d.inss||0);$('#nfIR').value=numBR(d.ir||0);$('#nfPIS').value=numBR(d.pis||0);$('#nfCOFINS').value=numBR(d.cofins||0);$('#nfCSLL').value=numBR(d.csll||0);$('#nfOutros').value=numBR(d.outros||0);$('#nfDesc').value=d.desc||'';calcNF();$('#nfPreview').style.display='block'}
+function calcNF(){const x={bruto:parseMoney($('#nfBruto').value),iss:parseMoney($('#nfISS').value),inss:parseMoney($('#nfINSS').value),ir:parseMoney($('#nfIR').value),pis:parseMoney($('#nfPIS').value),cofins:parseMoney($('#nfCOFINS').value),csll:parseMoney($('#nfCSLL').value),outros:parseMoney($('#nfOutros').value)};$('#nfLiquido').value=numBR(liquid(x))}
+$$('#nfBruto,#nfISS,#nfINSS,#nfIR,#nfPIS,#nfCOFINS,#nfCSLL,#nfOutros').forEach(x=>x.addEventListener('input',calcNF));
+$('#nfFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;$('#nfStatus').textContent='Lendo arquivo...';try{if(f.name.toLowerCase().endsWith('.xml')||f.type.includes('xml')){const txt=await f.text();const doc=new DOMParser().parseFromString(txt,'application/xml');if(doc.querySelector('parsererror'))throw new Error('XML inválido');const emit=tagAny(doc,['xNome','RazaoSocial','RazãoSocial','prestadorRazaoSocial']);let emit2='',dest='';const nomes=[...doc.getElementsByTagName('*')].filter(el=>el.localName==='xNome').map(el=>el.textContent.trim()).filter(Boolean);if(nomes.length){emit2=nomes[0];dest=nomes[1]||''}const d={numero:tagAny(doc,['nNF','NumeroNfse','Numero','numeroNFS-e']),data:tagAny(doc,['dhEmi','dEmi','DataEmissao','Competencia']),emitente:emit2||emit,dest,bruto:moneyTag(doc,['vNF','ValorServicos','vServ','ValorTotal']),iss:moneyTag(doc,['vISS','ValorIss','ValorISSQN']),inss:moneyTag(doc,['vINSS','ValorInss']),ir:moneyTag(doc,['vIRRF','vIR','ValorIr']),pis:moneyTag(doc,['vRetPIS','vPIS','ValorPis']),cofins:moneyTag(doc,['vRetCOFINS','vCOFINS','ValorCofins']),csll:moneyTag(doc,['vRetCSLL','ValorCsll']),outros:moneyTag(doc,['vDesc','OutrasRetencoes','ValorDeducoes']),desc:tagAny(doc,['Discriminacao','xProd','DescricaoServico'])};setNF(d);$('#nfStatus').textContent='XML lido. Revise os campos antes de confirmar.'}else{const text=await extractPDF(f);const d=parsePdfText(text);setNF(d);$('#nfStatus').textContent='PDF lido. A leitura de PDF é aproximada; confira todos os campos.'}}catch(err){console.error(err);$('#nfStatus').textContent='Não consegui extrair automaticamente. Você ainda pode preencher os campos manualmente.';setNF({})}});
+async function extractPDF(file){const pdfjs=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.mjs');pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.mjs';const data=new Uint8Array(await file.arrayBuffer());const pdf=await pdfjs.getDocument({data}).promise;let txt='';for(let i=1;i<=Math.min(pdf.numPages,8);i++){const p=await pdf.getPage(i);const c=await p.getTextContent();txt+=' '+c.items.map(x=>x.str).join(' ')}return txt}
+function firstMatch(t,res){for(const r of res){const m=t.match(r);if(m?.[1])return m[1].trim()}return''}
+function valMatch(t,res){return parseMoney(firstMatch(t,res))}
+function parsePdfText(t){const numero=firstMatch(t,[/N[uú]mero\s+(?:da\s+)?NFS-?e\s*[:#]?\s*([0-9.\/-]+)/i,/Nota\s+Fiscal\s*(?:n[º°o.]*)?\s*([0-9.\/-]+)/i,/NFS-?e\s*(?:n[º°o.]*)?\s*([0-9.\/-]+)/i]);const dataRaw=firstMatch(t,[/Data\s+(?:de\s+)?Emiss[aã]o\s*[:]?\s*(\d{2}\/\d{2}\/\d{4})/i,/Emiss[aã]o\s*[:]?\s*(\d{2}\/\d{2}\/\d{4})/i]);let data='';if(dataRaw){const[d,m,y]=dataRaw.split('/');data=`${y}-${m}-${d}`};const bruto=valMatch(t,[/Valor\s+(?:dos\s+)?Servi[cç]os\s*R?\$?\s*([\d.]+,\d{2})/i,/Valor\s+Total\s*R?\$?\s*([\d.]+,\d{2})/i,/Valor\s+da\s+Nota\s*R?\$?\s*([\d.]+,\d{2})/i]);const liquidoPdf=valMatch(t,[/Valor\s+L[ií]quido\s*R?\$?\s*([\d.]+,\d{2})/i]);const d={numero,data,emitente:firstMatch(t,[/Prestador(?:\s+de\s+Servi[cç]os)?\s*[:]?\s*([A-ZÀ-Ú0-9][A-ZÀ-Ú0-9 .&-]{4,})/i]),dest:firstMatch(t,[/Tomador(?:\s+de\s+Servi[cç]os)?\s*[:]?\s*([A-ZÀ-Ú0-9][A-ZÀ-Ú0-9 .&-]{4,})/i]),bruto,iss:valMatch(t,[/ISS(?:QN)?\s*(?:Retido)?\s*R?\$?\s*([\d.]+,\d{2})/i]),inss:valMatch(t,[/INSS\s*R?\$?\s*([\d.]+,\d{2})/i]),ir:valMatch(t,[/IRRF?\s*R?\$?\s*([\d.]+,\d{2})/i]),pis:valMatch(t,[/PIS\s*R?\$?\s*([\d.]+,\d{2})/i]),cofins:valMatch(t,[/COFINS\s*R?\$?\s*([\d.]+,\d{2})/i]),csll:valMatch(t,[/CSLL\s*R?\$?\s*([\d.]+,\d{2})/i]),outros:0,desc:'Importado de nota fiscal em PDF'};if(bruto&&liquidoPdf&&liquidoPdf<bruto){const known=d.iss+d.inss+d.ir+d.pis+d.cofins+d.csll;d.outros=Math.max(0,bruto-liquidoPdf-known)}return d}
+$('#salvarNF').onclick=()=>{const bruto=parseMoney($('#nfBruto').value);if(bruto<=0){alert('Confira o valor bruto da nota.');return}const tipo=$('#nfOperacao').value;const pessoa=tipo==='entrada'?($('#nfDest').value||$('#nfEmitente').value):($('#nfEmitente').value||$('#nfDest').value);const x={id:uid(),origem:'nf',tipo,data:$('#nfData').value||isoToday(),pessoa,doc:'NF '+($('#nfNumero').value||'s/n'),desc:$('#nfDesc').value||'Nota fiscal importada',pgto:$('#nfPgto').value,cat:tipo==='entrada'?'Recebimento de cliente':'Fornecedor',bruto,iss:parseMoney($('#nfISS').value),inss:parseMoney($('#nfINSS').value),ir:parseMoney($('#nfIR').value),pis:parseMoney($('#nfPIS').value),cofins:parseMoney($('#nfCOFINS').value),csll:parseMoney($('#nfCSLL').value),outros:parseMoney($('#nfOutros').value),obs:`Emitente: ${$('#nfEmitente').value} | Destinatário: ${$('#nfDest').value}`};state.mov.push(x);save();render();$('#importBox').style.display='none'};
+
+$('#btnRelatorio').onclick=()=>{saveMeta();window.print()};
+$('#btnCsv').onclick=()=>{const rows=[['Data','Tipo','Pessoa','Descrição','Documento','Pagamento','Categoria','Bruto','Retenções','Líquido'],...state.mov.map(x=>[x.data,x.tipo,x.pessoa,x.desc,x.doc,x.pgto,x.cat,numBR(x.bruto),numBR(deductions(x)),numBR(liquid(x))])];const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\n');download(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),'prestacao-contas.csv')};
+$('#btnBackup').onclick=()=>download(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),'backup-prestacao-contas.json');
+$('#restoreFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||!Array.isArray(d.mov))throw new Error();if(confirm('Restaurar este backup? Os dados atuais serão substituídos.')){state.meta=d.meta||{};state.mov=d.mov||[];save();fillMeta();render()}}catch{alert('Arquivo de backup inválido.')}});
+function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
+fillMeta();render();
+</script>
+</body>
+</html>
