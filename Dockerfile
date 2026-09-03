@@ -16,5 +16,6 @@ COPY kmo-driver /usr/share/caddy/apps/motorista
 COPY desconto /usr/share/caddy/apps/desconto
 COPY quantitativo-refeicoes /usr/share/caddy/apps/quantitativo-refeicoes
 COPY quiz-lobo /usr/share/caddy/apps/quiz-lobo
+COPY feogia /usr/share/caddy/apps/feogia
 
 EXPOSE 80
