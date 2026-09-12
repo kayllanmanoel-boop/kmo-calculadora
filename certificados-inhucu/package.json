@@ -1,0 +1,17 @@
+{
+  "name": "certificados-inhucu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Emissor e validador de certificados do Projeto Inhuçu Sustentável - KMO Gestão",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4"
+  }
+}
