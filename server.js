@@ -9,7 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 80;
 const CERT_PORT = 3001;
 const ADMIN_CNPJ = (process.env.ADMIN_CNPJ || '34655687000115').replace(/\D/g,'');
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || '';
+const PASSWORD_SALT_HEX = '6a38deeb9d2445c052a8cb49544a36a5';
+const PASSWORD_SCRYPT_HEX = '20a698009984d1a5c091aba593a0e208fef6c83750e0e252943b9732efcebf96';
 const INTERNAL_CERT_PASSWORD = 'kmo-internal-cert-bridge-v1';
 
 const cert = spawn(process.execPath, [path.join(__dirname, 'certificados-inhucu', 'server.js')], {
@@ -22,18 +23,16 @@ cert.on('exit', code => console.error('Servico de certificados encerrado:', code
 const proxy = createProxyMiddleware({ target: `http://127.0.0.1:${CERT_PORT}`, changeOrigin: false });
 const loginParser = express.urlencoded({ extended: false, limit: '50kb' });
 
-function hashPassword(value){
-  return crypto.createHash('sha256').update(String(value || '')).digest('hex');
-}
-function safeEqualHex(a,b){
-  try { return a.length === b.length && crypto.timingSafeEqual(Buffer.from(a,'hex'), Buffer.from(b,'hex')); }
-  catch { return false; }
+function verifyPassword(value){
+  try{
+    const derived = crypto.scryptSync(String(value || ''), Buffer.from(PASSWORD_SALT_HEX,'hex'), 32, {N:16384,r:8,p:1,maxmem:64*1024*1024});
+    return crypto.timingSafeEqual(derived, Buffer.from(PASSWORD_SCRYPT_HEX,'hex'));
+  }catch{return false;}
 }
 
 app.post('/admin/login', loginParser, (req,res) => {
   const cnpjOk = String(req.body.cnpj || '').replace(/\D/g,'') === ADMIN_CNPJ;
-  const passHash = hashPassword(req.body.password);
-  const passOk = ADMIN_PASSWORD_HASH && safeEqualHex(passHash, ADMIN_PASSWORD_HASH);
+  const passOk = verifyPassword(req.body.password);
   if(!cnpjOk || !passOk) return res.redirect('/admin?erro=1');
 
   const body = new URLSearchParams({ cnpj: ADMIN_CNPJ, password: INTERNAL_CERT_PASSWORD }).toString();
