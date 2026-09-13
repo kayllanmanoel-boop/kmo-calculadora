@@ -1,0 +1,1 @@
+Disparo de deploy para ativar a rota pública /rastreamento-psicologico/.
