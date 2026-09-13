@@ -1,0 +1,1 @@
+Ativa Dockerfile-router e router2 para /rastreamento-psicologico/.
