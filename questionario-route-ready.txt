@@ -1,0 +1,1 @@
+Rota pública do questionário configurada por script de inicialização.
