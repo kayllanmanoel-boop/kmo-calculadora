@@ -1,0 +1,1 @@
+Arquivo principal será reutilizado sem duplicar conteúdo manualmente.
