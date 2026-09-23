@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#76b82a">
+<title>Plano de Aula Mensal | KMO Educação</title>
+<style>
+:root{
+  --green:#8fd14f;
+  --green2:#dcefd0;
+  --deep:#2f5e42;
+  --red:#c3131a;
+  --ink:#111;
+  --line:#cbd5c0;
+  --paper:#fff;
+  --bg:#eef2ec;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#172018}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.appbar{position:sticky;top:0;z-index:20;background:#173326;color:#fff;box-shadow:0 2px 14px #0002}
+.appbar .inner{max-width:1500px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:12px}.brand .mark{width:42px;height:42px;border-radius:12px;background:var(--green);display:grid;place-items:center;font-weight:900;color:#173326}.brand strong{display:block;font-size:16px}.brand small{opacity:.8}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700}
+.btn.primary{background:var(--green);color:#173326}
+.btn.light{background:#fff;color:#173326}
+.btn.ghost{background:#ffffff18;color:#fff;border:1px solid #ffffff33}
+.workspace{max-width:1500px;margin:18px auto;display:grid;grid-template-columns:minmax(430px,540px) 1fr;gap:18px;padding:0 18px 30px}
+.panel{background:#fff;border-radius:16px;box-shadow:0 10px 30px #13230f14;padding:16px;align-self:start}
+.panel h2{font-size:18px;margin:4px 0 14px;color:#23452f}
+.section{border:1px solid #d8e2d2;border-radius:12px;padding:12px;margin-bottom:12px;background:#fbfdf9}
+.section h3{margin:0 0 10px;font-size:14px;color:#2b5539}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid.one{grid-template-columns:1fr}.grid.three{grid-template-columns:repeat(3,1fr)}
+label{display:block;font-size:12px;font-weight:700;color:#334139}
+input,select,textarea{width:100%;margin-top:5px;border:1px solid #cbd5c5;border-radius:8px;padding:9px;background:#fff;color:#111;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#76b82a;box-shadow:0 0 0 3px #8fd14f22}
+textarea{resize:vertical;min-height:70px}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.check{display:flex;align-items:flex-start;gap:7px;font-weight:600;font-size:11px;line-height:1.25;padding:5px 4px}
+.check input{width:auto;margin:2px 0 0}
+details.week{border:1px solid #d5dfcf;border-radius:10px;margin:9px 0;background:#fff}
+details.week summary{list-style:none;padding:11px 12px;background:#edf6e8;border-radius:10px;font-weight:800;color:#294c34;cursor:pointer}
+details.week[open] summary{border-radius:10px 10px 0 0;background:var(--green)}
+.weekbody{padding:12px}
+.codes{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.codecheck{display:flex;align-items:center;gap:4px;padding:5px 7px;border:1px solid #d3dccd;border-radius:7px;font-size:11px;font-weight:700;background:#fafcf9}
+.codecheck input{width:auto;margin:0}
+.hint{font-size:11px;color:#647066;margin:5px 0 0}
+.status{font-size:12px;margin-top:8px;color:#40614a;min-height:16px}
+.preview-wrap{min-width:0}
+.preview-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 8px;color:#506052;font-size:12px}
+.paper{background:#fff;box-shadow:0 10px 35px #26342222;border-radius:4px;overflow:hidden}
+.page{background:#fff;padding:9mm 10mm 8mm;min-height:210mm;page-break-after:always}
+.page:last-child{page-break-after:auto}
+.logos{height:28mm;display:flex;align-items:center;justify-content:space-between;gap:5px;overflow:hidden}
+.logo-chip{height:18mm;min-width:46px;max-width:120px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:8px;line-height:1.05;color:#2c665d;padding:3px}
+.logo-chip.big{font-size:11px;max-width:160px}.logo-chip.green{color:#5f9e2b}.logo-chip.blue{color:#245bb3}.logo-chip.dark{color:#111}.logo-chip.orange{color:#bf6928}
+.doc-title{text-align:center;font-size:16px;font-weight:900;margin:0 0 7px}
+.idbox{background:var(--green);border:1px solid #8ebf52;padding:6px 8px;font-size:10px;line-height:1.3}
+.idrow{display:grid;grid-template-columns:1fr 1fr;gap:5px 16px}
+.idbox b{color:#111}.value{color:var(--red);font-weight:700}
+.competencias{margin-top:4px;font-size:9px}
+.weekbar{margin-top:9px;background:var(--green);border:1px solid #8ebf52;padding:5px 8px;text-align:center;font-weight:900;font-size:11px}
+.axis{background:var(--green2);padding:5px 7px;border:1px solid #c7dbb8;font-size:10px}
+.axis .val{font-weight:800}
+.docgrid{display:grid;grid-template-columns:31% 69%;gap:12px;margin-top:7px}
+.docfield{margin:0 0 7px;font-size:10px;line-height:1.25}
+.docfield .lbl{font-weight:900;color:#111;text-transform:uppercase}
+.docfield .txt{color:var(--red);font-weight:600;white-space:pre-wrap}
+.docfull{margin-top:4px}
+.legendpage h2{text-align:center;margin:3px 0 8px;font-size:15px}
+.legend-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.legendbox{border:1px solid #b8c9ae}
+.legendbox h3{background:var(--green);margin:0;padding:6px;font-size:11px;text-align:center}
+.legendbox div{padding:4px 6px;border-top:1px solid #d8e3d2;font-size:9px;line-height:1.2}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin:30px 40px 0;text-align:center;font-size:9px}
+.signatures .line{border-top:1px solid #222;padding-top:4px}
+.foot{text-align:right;font-size:7px;color:#777;margin-top:8px}
+@media(max-width:1050px){.workspace{grid-template-columns:1fr}.preview-wrap{order:2}.panel{order:1}.appbar .inner{align-items:flex-start}.grid.three{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.workspace{padding:0 8px}.appbar .inner{flex-direction:column}.grid,.grid.three,.comp-grid{grid-template-columns:1fr}.paper{overflow:auto}.page{min-width:980px}}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body{background:#fff}
+  .no-print,.appbar,.panel,.preview-head{display:none!important}
+  .workspace{display:block;max-width:none;margin:0;padding:0}
+  .preview-wrap{width:100%}.paper{box-shadow:none;border:0}
+  .page{width:297mm;height:210mm;min-height:210mm;padding:7mm 9mm 6mm;overflow:hidden}
+}
+</style>
+</head>
+<body>
+<header class="appbar no-print">
+  <div class="inner">
+    <div class="brand"><div class="mark">KMO</div><div><strong>Plano de Aula Mensal</strong><small>KMO Educação • modelo institucional</small></div></div>
+    <div class="actions">
+      <button class="btn ghost" id="novo">Novo</button>
+      <button class="btn light" id="salvar">Salvar</button>
+      <button class="btn light" id="word">Baixar Word</button>
+      <button class="btn primary" id="pdf">Imprimir / PDF</button>
+    </div>
+  </div>
+</header>
+
+<main class="workspace">
+  <aside class="panel no-print">
+    <h2>Preencha o planejamento</h2>
+
+    <div class="section">
+      <h3>1. Identificação</h3>
+      <div class="grid">
+        <label>Área do conhecimento<input id="area" value="CIÊNCIAS HUMANAS"></label>
+        <label>Série / Turmas<input id="turmas" value="6º ANO - A, B E C"></label>
+        <label>Mês<select id="mes">
+          <option>JANEIRO</option><option>FEVEREIRO</option><option>MARÇO</option><option>ABRIL</option><option>MAIO</option><option>JUNHO</option><option>JULHO</option><option>AGOSTO</option><option selected>SETEMBRO</option><option>OUTUBRO</option><option>NOVEMBRO</option><option>DEZEMBRO</option>
+        </select></label>
+        <label>Ano<input id="ano" type="number" value="2026"></label>
+        <label>Componente curricular<input id="componente" value="GEOGRAFIA"></label>
+        <label>Professor(a)<input id="professora" value="ZENILDA MENDES DA SILVA"></label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>2. Competências Gerais</h3>
+      <div id="competenciasForm" class="comp-grid"></div>
+    </div>
+
+    <div class="section">
+      <div class="grid">
+        <label>Quantidade de semanas
+          <select id="numSemanas"><option>4</option><option selected>5</option></select>
+        </label>
+        <label>Formato
+          <select id="formato"><option value="mensal" selected>Planejamento Mensal</option></select>
+        </label>
+      </div>
+    </div>
+
+    <div id="weeksForm"></div>
+
+    <div class="section">
+      <h3>Legenda no final</h3>
+      <label class="check"><input type="checkbox" id="incluiLegenda" checked> Incluir página com legendas M1–M10, R1–R12 e assinaturas.</label>
+    </div>
+
+    <div class="actions" style="justify-content:flex-start">
+      <button class="btn primary" id="atualizar">Atualizar visualização</button>
+      <button class="btn light" style="border:1px solid #ccd8c6" id="copiar">Copiar texto</button>
+    </div>
+    <div id="status" class="status"></div>
+  </aside>
+
+  <section class="preview-wrap">
+    <div class="preview-head no-print"><span>Pré-visualização do documento</span><span>A4 paisagem</span></div>
+    <div id="printArea" class="paper"></div>
+  </section>
+</main>
+
+<script>
+const competencias = [
+  "CONHECIMENTO",
+  "PENSAMENTO CIENTÍFICO, CRÍTICO E CRIATIVO",
+  "REPERTÓRIO CULTURAL",
+  "CULTURA DIGITAL",
+  "COMUNICAÇÃO",
+  "TRABALHO E PROJETO DE VIDA",
+  "ARGUMENTAÇÃO",
+  "AUTOCONHECIMENTO E AUTOCUIDADO",
+  "EMPATIA E COOPERAÇÃO",
+  "RESPONSABILIDADE E CIDADANIA"
+];
+const metodologias = {
+  M1:"APRESENTAÇÃO DO OBJETO DE CONHECIMENTO",
+  M2:"RETOMADA DO OBJETO DE CONHECIMENTO COM AULA EXPOSITIVA",
+  M3:"DESENVOLVER ATIVIDADES DO LIVRO",
+  M4:"DESENVOLVER ATIVIDADES DO APROVA BRASIL",
+  M5:"REVISÃO DOS OBJETOS DE CONHECIMENTO",
+  M6:"CORREÇÃO DAS ATIVIDADES PROPOSTAS",
+  M7:"APLICAÇÃO DE AVALIAÇÕES INTERNAS",
+  M8:"APLICAÇÃO DE SIMULADOS DE AVALIAÇÕES EXTERNAS",
+  M9:"CORREÇÃO DE SIMULADOS DE AVALIAÇÕES EXTERNAS",
+  M10:"CONFECÇÃO DE MATERIAIS DIDÁTICO-PEDAGÓGICOS"
+};
+const recursos = {
+  R1:"LIVRO DIDÁTICO",
+  R2:"DATA SHOW, NOTEBOOK E VÍDEO",
+  R3:"BIBLIOTECA",
+  R4:"LOUSA E PINCEL",
+  R5:"LOUSA DIGITAL",
+  R6:"MATERIAL LÚDICO (JOGOS)",
+  R7:"MATERIAL DE DESENHO GEOMÉTRICO",
+  R8:"LIVRO DO APROVA BRASIL",
+  R9:"MATERIAL XEROCADO (SIMULADOS E DIAGNÓSTICOS)",
+  R10:"LABORATÓRIO DE INFORMÁTICA",
+  R11:"MATERIAL CONCRETO",
+  R12:"TABUADA"
+};
+
+const initialWeeks = Array.from({length:5},(_,i)=>({
+  periodo:"",
+  eixo:"",
+  aulas:"02 AULAS",
+  objeto:"",
+  habilidades:"",
+  objetivo:"",
+  metodologia:"",
+  avaliacao:"",
+  recursosTexto:"",
+  m:[],
+  r:[]
+}));
+let weeks = initialWeeks.map(x=>({...x,m:[],r:[]}));
+
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function val(id){return document.getElementById(id).value.trim()}
+function checkedCompetencias(){return [...document.querySelectorAll('.comp:checked')].map(x=>+x.value)}
+
+function renderCompetencias(){
+  const selected = new Set([0,1,2,4,6,8,9]);
+  document.getElementById('competenciasForm').innerHTML=competencias.map((c,i)=>
+    '<label class="check"><input class="comp" type="checkbox" value="'+i+'" '+(selected.has(i)?'checked':'')+'> '+c+'</label>'
+  ).join('');
+}
+function codeBoxes(kind,index,obj,selected){
+  return '<div class="codes">'+Object.keys(obj).map(code=>
+    '<label class="codecheck"><input type="checkbox" data-kind="'+kind+'" data-week="'+index+'" value="'+code+'" '+(selected.includes(code)?'checked':'')+'> '+code+'</label>'
+  ).join('')+'</div>';
+}
+function weekForm(i){
+  const w=weeks[i], n=i+1;
+  return '<details class="week" open><summary>'+n+'ª SEMANA</summary><div class="weekbody">'+
+  '<div class="grid"><label>Período de execução<input data-f="periodo" data-week="'+i+'" value="'+esc(w.periodo)+'" placeholder="Ex.: 01/09/2026 a 04/09/2026"></label>'+
+  '<label>Quantidade de aulas<input data-f="aulas" data-week="'+i+'" value="'+esc(w.aulas)+'"></label></div>'+
+  '<label>Eixo / Unidade temática<textarea data-f="eixo" data-week="'+i+'" placeholder="Ex.: Conexões e escalas / Natureza, ambientes e qualidade de vida">'+esc(w.eixo)+'</textarea></label>'+
+  '<label>Objeto do conhecimento<textarea data-f="objeto" data-week="'+i+'" placeholder="Conteúdo, capítulo, páginas e conceitos">'+esc(w.objeto)+'</textarea></label>'+
+  '<label>Habilidades BNCC/DCRC<textarea data-f="habilidades" data-week="'+i+'" placeholder="Ex.: EF06GE09 e EF06GE11">'+esc(w.habilidades)+'</textarea></label>'+
+  '<label>Objetivo de aprendizagem<textarea data-f="objetivo" data-week="'+i+'" placeholder="O que o estudante deverá compreender/desenvolver">'+esc(w.objetivo)+'</textarea></label>'+
+  '<label>Metodologias e atividades a desenvolver<textarea data-f="metodologia" data-week="'+i+'" placeholder="Descreva as atividades da semana">'+esc(w.metodologia)+'</textarea></label>'+
+  '<div class="hint">Códigos rápidos de metodologia:</div>'+codeBoxes('m',i,metodologias,w.m)+
+  '<label>Avaliação da aprendizagem<textarea data-f="avaliacao" data-week="'+i+'" placeholder="Participação, atividade, produção, correção, desempenho...">'+esc(w.avaliacao)+'</textarea></label>'+
+  '<label>Recursos didáticos<textarea data-f="recursosTexto" data-week="'+i+'" placeholder="Descreva os recursos utilizados">'+esc(w.recursosTexto)+'</textarea></label>'+
+  '<div class="hint">Códigos rápidos de recursos:</div>'+codeBoxes('r',i,recursos,w.r)+
+  '</div></details>';
+}
+function renderWeekForms(){
+  const n=+document.getElementById('numSemanas').value;
+  document.getElementById('weeksForm').innerHTML=Array.from({length:n},(_,i)=>weekForm(i)).join('');
+}
+function compText(){
+  const sel=new Set(checkedCompetencias());
+  return competencias.map((c,i)=>'('+(sel.has(i)?'X':' ')+') '+c).join('  ');
+}
+function logoLine(){
+  return '<div class="logos">'+
+    '<div class="logo-chip big">TIANGUÁ<br><span style="font-size:7px">PREFEITURA • CUIDANDO DA NOSSA GENTE</span></div>'+
+    '<div class="logo-chip green"># ENTRE NO<br>CLIMA UNICEF</div>'+
+    '<div class="logo-chip blue">SELO UNICEF<br>2025–2028</div>'+
+    '<div class="logo-chip dark">NUCA</div>'+
+    '<div class="logo-chip green">MAISPAIC</div>'+
+    '<div class="logo-chip green">PAIC<br>INTEGRAL</div>'+
+    '<div class="logo-chip green">NOSSA EDUCAÇÃO<br>MELHOR</div>'+
+    '<div class="logo-chip orange">SAET</div>'+
+    '<div class="logo-chip">ESCOLA DE ENSINO<br>FUNDAMENTAL</div>'+
+  '</div>';
+}
+function codesPrefix(codes){
+  return codes && codes.length ? codes.join(', ').replace(/, ([^,]*)$/, ' e $1') + '. ' : '';
+}
+function weekPage(w,i,first){
+  return '<section class="page">'+logoLine()+
+    (first?'<div class="doc-title">PLANEJAMENTO MENSAL</div>'+
+    '<div class="idbox"><div class="idrow"><div><b>ÁREA DO CONHECIMENTO:</b> <span class="value">'+esc(val('area'))+'</span></div><div><b>SÉRIE/TURMAS:</b> <span class="value">'+esc(val('turmas'))+'</span> &nbsp; | &nbsp; <b>MÊS:</b> <span class="value">'+esc(val('mes'))+' / '+esc(val('ano'))+'</span></div><div><b>COMPONENTE CURRICULAR:</b> <span class="value">'+esc(val('componente'))+'</span></div><div><b>PROFESSOR(A):</b> <span class="value">'+esc(val('professora'))+'</span></div></div><div class="competencias"><b>COMPETÊNCIAS GERAIS:</b> '+esc(compText())+'</div></div>':'')+
+    '<div class="weekbar">'+(i+1)+'ª SEMANA &nbsp;&nbsp; | &nbsp;&nbsp; PERÍODO DE EXECUÇÃO: '+esc(w.periodo||'________________________')+'</div>'+
+    '<div class="axis"><b>EIXO/UNIDADE TEMÁTICA:</b><br><span class="val">'+esc(w.eixo||'—')+'</span></div>'+
+    '<div class="docgrid"><div>'+
+      '<div class="docfield"><div class="lbl">QUANTIDADE DE AULAS:</div><div class="txt">'+esc(w.aulas||'—')+'</div></div>'+
+      '<div class="docfield"><div class="lbl">HABILIDADES BNCC/DCRC:</div><div class="txt">'+esc(w.habilidades||'—')+'</div></div>'+
+    '</div><div>'+
+      '<div class="docfield"><div class="lbl">OBJETO DO CONHECIMENTO:</div><div class="txt">'+esc(w.objeto||'—')+'</div></div>'+
+    '</div></div>'+
+    '<div class="docfield docfull"><div class="lbl">OBJETIVO DE APRENDIZAGEM:</div><div class="txt">'+esc(w.objetivo||'—')+'</div></div>'+
+    '<div class="docfield docfull"><div class="lbl">METODOLOGIAS E ATIVIDADES A DESENVOLVER:</div><div class="txt">'+esc(codesPrefix(w.m)+(w.metodologia||'—'))+'</div></div>'+
+    '<div class="docfield docfull"><div class="lbl">AVALIAÇÃO DA APRENDIZAGEM:</div><div class="txt">'+esc(w.avaliacao||'—')+'</div></div>'+
+    '<div class="docfield docfull"><div class="lbl">RECURSOS DIDÁTICOS:</div><div class="txt">'+esc(codesPrefix(w.r)+(w.recursosTexto||'—'))+'</div></div>'+
+    '<div class="foot">Planejamento mensal • '+esc(val('componente'))+' • '+esc(val('mes'))+'/'+esc(val('ano'))+'</div>'+
+  '</section>';
+}
+function legendPage(){
+  const mhtml=Object.entries(metodologias).map(([k,v])=>'<div><b>'+k+'</b> '+esc(v)+'</div>').join('');
+  const rhtml=Object.entries(recursos).map(([k,v])=>'<div><b>'+k+'</b> '+esc(v)+'</div>').join('');
+  return '<section class="page legendpage">'+logoLine()+'<h2>LEGENDAS DO PLANEJAMENTO</h2><div class="legend-columns">'+
+    '<div class="legendbox"><h3>LEGENDA DAS ATIVIDADES A DESENVOLVER</h3>'+mhtml+'</div>'+
+    '<div class="legendbox"><h3>RECURSOS DIDÁTICOS</h3>'+rhtml+'</div></div>'+
+    '<div class="signatures"><div class="line">COORDENADOR PEDAGÓGICO</div><div class="line">COORDENADOR DE ÁREA</div></div>'+
+    '<div class="foot">Planejamento mensal • '+esc(val('componente'))+' • '+esc(val('mes'))+'/'+esc(val('ano'))+'</div></section>';
+}
+function syncWeeksFromDOM(){
+  document.querySelectorAll('[data-f]').forEach(el=>{ const i=+el.dataset.week; weeks[i][el.dataset.f]=el.value; });
+  document.querySelectorAll('[data-kind]').forEach(el=>{
+    const i=+el.dataset.week,k=el.dataset.kind;
+    if(!weeks[i][k]) weeks[i][k]=[];
+    const set=new Set(weeks[i][k]);
+    el.checked?set.add(el.value):set.delete(el.value);
+    weeks[i][k]=[...set].sort((a,b)=>parseInt(a.slice(1))-parseInt(b.slice(1)));
+  });
+}
+function renderPreview(){
+  syncWeeksFromDOM();
+  const n=+document.getElementById('numSemanas').value;
+  let html=weeks.slice(0,n).map((w,i)=>weekPage(w,i,i===0)).join('');
+  if(document.getElementById('incluiLegenda').checked) html+=legendPage();
+  document.getElementById('printArea').innerHTML=html;
+}
+function getData(){
+  syncWeeksFromDOM();
+  return {
+    area:val('area'),turmas:val('turmas'),mes:val('mes'),ano:val('ano'),componente:val('componente'),professora:val('professora'),
+    competencias:checkedCompetencias(),numSemanas:+document.getElementById('numSemanas').value,incluiLegenda:document.getElementById('incluiLegenda').checked,
+    weeks
+  };
+}
+function setData(d){
+  if(!d)return;
+  ['area','turmas','mes','ano','componente','professora'].forEach(id=>{if(d[id]!=null)document.getElementById(id).value=d[id]});
+  if(d.numSemanas)document.getElementById('numSemanas').value=d.numSemanas;
+  document.getElementById('incluiLegenda').checked=d.incluiLegenda!==false;
+  if(Array.isArray(d.weeks)) weeks=initialWeeks.map((base,i)=>({...base,...(d.weeks[i]||{}),m:[...(d.weeks[i]?.m||[])],r:[...(d.weeks[i]?.r||[])]}));
+  if(Array.isArray(d.competencias)){
+    document.querySelectorAll('.comp').forEach(c=>c.checked=d.competencias.includes(+c.value));
+  }
+  renderWeekForms();renderPreview();
+}
+function status(t){document.getElementById('status').textContent=t;setTimeout(()=>{document.getElementById('status').textContent=''},2600)}
+function save(){localStorage.setItem('kmoPlanoAulaMensalV2',JSON.stringify(getData()));status('Planejamento salvo neste dispositivo.')}
+function resetAll(){
+  if(!confirm('Criar um novo planejamento e limpar os campos semanais?'))return;
+  localStorage.removeItem('kmoPlanoAulaMensalV2');
+  weeks=initialWeeks.map(x=>({...x,m:[],r:[]}));
+  renderWeekForms();renderPreview();status('Novo planejamento iniciado.');
+}
+function exportWord(){
+  renderPreview();
+  const css = `<style>
+    @page{size:A4 landscape;margin:8mm}body{font-family:Arial,sans-serif;color:#111}.page{page-break-after:always}.logos{display:flex;justify-content:space-between;align-items:center;height:70px}.logo-chip{font-size:8px;font-weight:bold;text-align:center}.doc-title{text-align:center;font-size:16px;font-weight:bold}.idbox,.weekbar{background:#8fd14f;padding:6px}.idrow{display:table;width:100%}.idrow>div{display:table-cell;width:50%}.value,.txt{color:#c3131a;font-weight:bold}.competencias{font-size:9px}.weekbar{text-align:center;font-weight:bold;margin-top:8px}.axis{background:#dcefd0;padding:5px}.docgrid{display:table;width:100%;margin-top:7px}.docgrid>div{display:table-cell;width:50%;vertical-align:top}.docfield{font-size:10px;margin:6px 0}.lbl{font-weight:bold}.legend-columns{display:table;width:100%}.legendbox{display:table-cell;width:50%;vertical-align:top;border:1px solid #aaa}.legendbox h3{background:#8fd14f}.legendbox div{font-size:9px;padding:3px}.signatures{display:table;width:100%;margin-top:40px}.signatures>div{display:table-cell;text-align:center;width:50%}</style>`;
+  const content='<!doctype html><html><head><meta charset="utf-8">'+css+'</head><body>'+document.getElementById('printArea').innerHTML+'</body></html>';
+  const blob=new Blob(['\ufeff',content],{type:'application/msword'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='PLANO_'+val('componente').replace(/\s+/g,'_')+'_'+val('mes')+'_'+val('ano')+'.doc';
+  a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);status('Arquivo Word gerado.');
+}
+async function copyText(){
+  syncWeeksFromDOM();
+  const n=+document.getElementById('numSemanas').value;
+  let t='PLANEJAMENTO MENSAL\nÁREA DO CONHECIMENTO: '+val('area')+' | SÉRIE/TURMAS: '+val('turmas')+' | MÊS: '+val('mes')+'/'+val('ano')+'\nCOMPONENTE CURRICULAR: '+val('componente')+' | PROFESSOR(A): '+val('professora')+'\nCOMPETÊNCIAS GERAIS: '+compText()+'\n\n';
+  weeks.slice(0,n).forEach((w,i)=>{t+=(i+1)+'ª SEMANA | PERÍODO DE EXECUÇÃO: '+w.periodo+'\nEIXO/UNIDADE TEMÁTICA: '+w.eixo+'\nQUANTIDADE DE AULAS: '+w.aulas+'\nOBJETO DO CONHECIMENTO: '+w.objeto+'\nHABILIDADES BNCC/DCRC: '+w.habilidades+'\nOBJETIVO DE APRENDIZAGEM: '+w.objetivo+'\nMETODOLOGIAS E ATIVIDADES A DESENVOLVER: '+codesPrefix(w.m)+w.metodologia+'\nAVALIAÇÃO DA APRENDIZAGEM: '+w.avaliacao+'\nRECURSOS DIDÁTICOS: '+codesPrefix(w.r)+w.recursosTexto+'\n\n'});
+  await navigator.clipboard.writeText(t);status('Texto copiado.');
+}
+
+renderCompetencias();renderWeekForms();
+const saved=localStorage.getItem('kmoPlanoAulaMensalV2');
+if(saved){try{setData(JSON.parse(saved))}catch(e){renderPreview()}}else renderPreview();
+
+document.addEventListener('input',e=>{
+  if(e.target.matches('[data-f],[data-kind],.comp,#area,#turmas,#mes,#ano,#componente,#professora,#incluiLegenda')){syncWeeksFromDOM();renderPreview()}
+});
+document.getElementById('numSemanas').addEventListener('change',()=>{syncWeeksFromDOM();renderWeekForms();renderPreview()});
+document.getElementById('atualizar').onclick=renderPreview;
+document.getElementById('salvar').onclick=save;
+document.getElementById('novo').onclick=resetAll;
+document.getElementById('pdf').onclick=()=>{renderPreview();window.print()};
+document.getElementById('word').onclick=exportWord;
+document.getElementById('copiar').onclick=copyText;
+</script>
+</body>
+</html>
