@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Calculadora de Comissão</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.10);
+    }
+    h1 { margin: 0 0 8px; font-size: 26px; text-align: center; }
+    .sub { text-align: center; color: #6b7280; margin-bottom: 24px; font-size: 14px; }
+    label { display: block; font-weight: 700; margin: 16px 0 7px; }
+    input {
+      width: 100%; font-size: 20px; padding: 15px 16px;
+      border: 1px solid #d1d5db; border-radius: 13px; outline: none; background: #fff;
+    }
+    input:focus { border-color: #111827; box-shadow: 0 0 0 3px rgba(17,24,39,.08); }
+    .result {
+      margin-top: 22px; background: #111827; color: white;
+      border-radius: 16px; padding: 20px; text-align: center;
+    }
+    .result small { display: block; opacity: .75; margin-bottom: 7px; font-size: 13px; }
+    .result strong { font-size: 31px; display: block; }
+    .formula { margin-top: 10px; font-size: 13px; color: #6b7280; text-align: center; }
+    button {
+      width: 100%; margin-top: 16px; border: 0; padding: 13px;
+      border-radius: 12px; background: #e5e7eb; color: #111827;
+      font-weight: 700; font-size: 15px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Calculadora de Comissão</h1>
+    <div class="sub">Informe o valor apurado e a porcentagem.</div>
+
+    <label for="apurado">Valor apurado</label>
+    <input id="apurado" type="text" inputmode="decimal" placeholder="R$ 0,00" />
+
+    <label for="percentual">Porcentagem da comissão</label>
+    <input id="percentual" type="text" inputmode="decimal" placeholder="0%" />
+
+    <div class="result">
+      <small>VALOR DA COMISSÃO</small>
+      <strong id="resultado">R$ 0,00</strong>
+    </div>
+
+    <div class="formula" id="detalhe">R$ 0,00 × 0% = R$ 0,00</div>
+    <button id="limpar">Limpar</button>
+  </main>
+
+  <script>
+    const apurado = document.getElementById('apurado');
+    const percentual = document.getElementById('percentual');
+    const resultado = document.getElementById('resultado');
+    const detalhe = document.getElementById('detalhe');
+    const limpar = document.getElementById('limpar');
+
+    const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    function parseNumero(v) {
+      if (!v) return 0;
+      v = String(v).replace(/R\$/gi, '').replace(/%/g, '').replace(/\s/g, '')
+        .replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '');
+      const n = parseFloat(v);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function calcular() {
+      const valor = parseNumero(apurado.value);
+      const pct = parseNumero(percentual.value);
+      const comissao = valor * (pct / 100);
+      resultado.textContent = brl.format(comissao);
+      detalhe.textContent = `${brl.format(valor)} × ${pct.toLocaleString('pt-BR')}% = ${brl.format(comissao)}`;
+    }
+
+    apurado.addEventListener('input', calcular);
+    percentual.addEventListener('input', calcular);
+
+    apurado.addEventListener('blur', () => {
+      const valor = parseNumero(apurado.value);
+      apurado.value = valor ? brl.format(valor) : '';
+      calcular();
+    });
+
+    percentual.addEventListener('blur', () => {
+      const pct = parseNumero(percentual.value);
+      percentual.value = pct ? `${pct.toLocaleString('pt-BR')}%` : '';
+      calcular();
+    });
+
+    limpar.addEventListener('click', () => {
+      apurado.value = '';
+      percentual.value = '';
+      calcular();
+      apurado.focus();
+    });
+
+    calcular();
+  </script>
+</body>
+</html>
