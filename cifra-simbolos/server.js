@@ -1,0 +1,1 @@
+const http=require('http'),fs=require('fs'),path=require('path');const port=process.env.PORT||3000;http.createServer((req,res)=>{const f=path.join(__dirname,'index.html');fs.readFile(f,(e,d)=>{if(e){res.writeHead(500);return res.end('Erro');}res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'});res.end(d);});}).listen(port,'0.0.0.0');
