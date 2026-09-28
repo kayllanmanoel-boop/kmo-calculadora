@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cifra de Símbolos</title>
+<style>
+:root{--bg:#02070b;--panel:#07131b;--cyan:#20dfff;--green:#68ff9a;--text:#e9fbff;--muted:#8cb8c3}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top,#08202c 0,#02070b 55%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+.wrap{max-width:980px;margin:auto;padding:24px}
+.header,.card{border:1px solid rgba(32,223,255,.45);background:rgba(5,17,24,.9);box-shadow:0 0 22px rgba(32,223,255,.10);border-radius:18px}
+.header{padding:24px;text-align:center;margin-bottom:18px}
+h1{margin:0;color:var(--green);letter-spacing:2px;text-shadow:0 0 14px rgba(104,255,154,.25)}
+.sub{color:var(--muted);margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{padding:20px;margin-bottom:18px}
+label{display:block;font-weight:700;margin-bottom:8px;color:var(--cyan)}
+textarea{width:100%;min-height:150px;resize:vertical;background:#020b10;border:1px solid rgba(32,223,255,.45);border-radius:12px;color:white;padding:14px;font-size:17px;outline:none}
+textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(104,255,154,.10)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--green),#2fd6a1);color:#02100c}
+button.alt{background:#0b2230;color:var(--cyan);border:1px solid rgba(32,223,255,.45)}
+.result{margin-top:14px;padding:14px;border-radius:12px;background:#020b10;border:1px solid rgba(104,255,154,.3);white-space:pre-wrap;word-break:break-word;min-height:60px;font-family:Consolas,monospace;font-size:18px}
+.table{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.item{padding:10px;border:1px solid rgba(32,223,255,.22);border-radius:9px;background:#041017;text-align:center}
+.item b{color:var(--green)} .foot{font-size:13px;color:var(--muted);text-align:center;padding:8px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.table{grid-template-columns:repeat(2,1fr)}.wrap{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1>CIFRA DE SÍMBOLOS</h1>
+    <div class="sub">Escreva uma frase, transforme em símbolos e decodifique quando quiser.</div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <label for="plain">🔐 Escrever frase</label>
+      <textarea id="plain" placeholder="Ex.: Pronto, já estão feito. Boa noite, pequeno gafanhoto."></textarea>
+      <div class="row">
+        <button onclick="encodeText()">CODIFICAR</button>
+        <button class="alt" onclick="clearEncode()">LIMPAR</button>
+      </div>
+      <div id="encoded" class="result">A mensagem cifrada aparecerá aqui.</div>
+      <div class="row"><button class="alt" onclick="copyFrom('encoded')">COPIAR CÓDIGO</button></div>
+    </section>
+
+    <section class="card">
+      <label for="cipher">🔓 Decodificar mensagem</label>
+      <textarea id="cipher" placeholder="Cole aqui a mensagem em símbolos..."></textarea>
+      <div class="row">
+        <button onclick="decodeText()">DECODIFICAR</button>
+        <button class="alt" onclick="clearDecode()">LIMPAR</button>
+      </div>
+      <div id="decoded" class="result">A frase decodificada aparecerá aqui.</div>
+      <div class="row"><button class="alt" onclick="copyFrom('decoded')">COPIAR FRASE</button></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <label>📘 Tabela para decodificar</label>
+    <div id="table" class="table"></div>
+  </section>
+  <div class="foot">Cada letra usa 2 símbolos. Espaços entre palavras são mantidos.</div>
+</div>
+<script>
+const map={
+A:'];',B:']~',C:']/',D:']\\',E:']+',F:']-',G:']*',H:']ç',I:'[;',J:'[~',K:'[/',L:'[\\',M:'[+',N:'[-',O:'[*',P:'[ç',Q:'/;',R:'/~',S:'//',T:'/\\',U:'/+',V:'/-',W:'/*',X:'/ç',Y:'\\;',Z:'\\~'
+};
+const reverse=Object.fromEntries(Object.entries(map).map(([k,v])=>[v,k]));
+function normalize(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase()}
+function encodeText(){
+  const s=normalize(document.getElementById('plain').value);
+  let out='';
+  for(const ch of s){ if(map[ch]) out+=map[ch]; else if(ch===' ') out+=' '; else if(ch==='\n') out+='\n'; }
+  document.getElementById('encoded').textContent=out||'Digite uma frase.';
+  document.getElementById('cipher').value=out;
+}
+function decodeText(){
+  const s=document.getElementById('cipher').value;
+  let out='',i=0;
+  while(i<s.length){
+    if(s[i]===' '||s[i]==='\n'||s[i]==='\t'){out+=s[i];i++;continue}
+    const pair=s.slice(i,i+2);
+    if(reverse[pair]){out+=reverse[pair];i+=2}else{out+='?';i++}
+  }
+  document.getElementById('decoded').textContent=out||'Cole uma mensagem cifrada.';
+}
+function clearEncode(){document.getElementById('plain').value='';document.getElementById('encoded').textContent='A mensagem cifrada aparecerá aqui.'}
+function clearDecode(){document.getElementById('cipher').value='';document.getElementById('decoded').textContent='A frase decodificada aparecerá aqui.'}
+async function copyFrom(id){const t=document.getElementById(id).textContent;try{await navigator.clipboard.writeText(t)}catch(e){}}
+const t=document.getElementById('table');
+Object.entries(map).forEach(([letter,code])=>{const d=document.createElement('div');d.className='item';d.innerHTML='<b>'+letter+'</b> &nbsp; = &nbsp; <code>'+code.replace(/</g,'&lt;')+'</code>';t.appendChild(d)});
+</script>
+</body>
+</html>
